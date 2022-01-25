@@ -31,6 +31,39 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<Role> roles;
 
+	public User() {
+		super();
+	}
+	
+
+	public User(Long id, String username, String userlastname, String email, String password, String dateAlta,
+			Boolean enabled, Set<Role> roles) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.userlastname = userlastname;
+		this.email = email;
+		this.password = password;
+		this.dateAlta = dateAlta;
+		this.enabled = enabled;
+		this.roles = roles;
+	}
+	
+
+
+	public User(String username, String userlastname, String email, String password, String dateAlta, Boolean enabled,
+			Set<Role> roles) {
+		super();
+		this.username = username;
+		this.userlastname = userlastname;
+		this.email = email;
+		this.password = password;
+		this.dateAlta = dateAlta;
+		this.enabled = enabled;
+		this.roles = roles;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

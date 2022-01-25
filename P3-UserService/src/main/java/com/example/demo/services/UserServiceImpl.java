@@ -2,7 +2,7 @@ package com.example.demo.services;
 
 import java.util.Arrays;
 import java.util.HashSet;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService {
 	private TipoPasswordEncoder encoder;
 	
 	@Override
+	public List<User> findAll(){
+		return userRepository.findAll();
+	}
+	
+	@Override
 	public User findUserByUsername(String username) {
 		
 		return userRepository.findByUsername(username);
@@ -38,7 +43,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByEmail(email);
 	}
 	@Override
-	public void saveUser(User user) {
+	public User saveUser(User user) {
 		System.out.println("---- Pwd: " + encoder.encode(user.getPassword()));
 		user.setPassword(encoder.encode(user.getPassword()));
 		user.setEnabled(true);
@@ -46,7 +51,8 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		
 		System.out.println("User is ready: " + user);
-		userRepository.save(user);
+		//userRepository.save(user);
+		return userRepository.save(user);
 	}
 	
 	
