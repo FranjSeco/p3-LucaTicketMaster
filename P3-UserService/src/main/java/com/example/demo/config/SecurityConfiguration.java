@@ -19,7 +19,7 @@ import com.example.demo.security.TipoPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	/*@Autowired
+	@Autowired
 	@Qualifier("lame")
 	private TipoPasswordEncoder encoder;
 
@@ -35,16 +35,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
-				.dataSource(dataSource)
-				// No se esta usando realmente porque lo genero desde Servicios
-				.passwordEncoder(encoder);
+		auth
+			.jdbcAuthentication()
+			.usersByUsernameQuery(usersQuery)
+			.authoritiesByUsernameQuery(rolesQuery)
+			.dataSource(dataSource)
+			// No se esta usando realmente porque lo genero desde Servicios
+			.passwordEncoder(encoder);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		http
+		
+		.authorizeRequests()
 		.antMatchers("/login").permitAll()
+		.antMatchers("/users/**").permitAll()
 		.antMatchers("/console/**").permitAll()
 		.antMatchers("/register").permitAll()
 		.anyRequest().authenticated()
@@ -74,6 +80,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web
 			.ignoring()
 			.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-	}*/
+	}
 
 }

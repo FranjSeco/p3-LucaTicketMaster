@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `userSecurity` /*!40100 DEFAULT CHARACTER SET utf8 */;
+-- CREATE DATABASE  IF NOT EXISTS `userSecurity` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `userSecurity`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
@@ -51,10 +51,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
-  `userlastname` varchar(45) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `dateAlta` date DEFAULT NULL,
   `enabled` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;

@@ -18,10 +18,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String username;
-	private String userlastname;
 	private String email;
 	private String password;
-	private String dateAlta;
 	private Boolean enabled;
 
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -30,39 +28,6 @@ public class User {
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<Role> roles;
-
-	public User() {
-		super();
-	}
-	
-
-	public User(Long id, String username, String userlastname, String email, String password, String dateAlta,
-			Boolean enabled, Set<Role> roles) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.userlastname = userlastname;
-		this.email = email;
-		this.password = password;
-		this.dateAlta = dateAlta;
-		this.enabled = enabled;
-		this.roles = roles;
-	}
-	
-
-
-	public User(String username, String userlastname, String email, String password, String dateAlta, Boolean enabled,
-			Set<Role> roles) {
-		super();
-		this.username = username;
-		this.userlastname = userlastname;
-		this.email = email;
-		this.password = password;
-		this.dateAlta = dateAlta;
-		this.enabled = enabled;
-		this.roles = roles;
-	}
-
 
 	public Long getId() {
 		return id;
@@ -115,32 +80,11 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
-
-	public String getUserlastname() {
-		return userlastname;
-	}
-
-	public void setUserlastname(String userlastname) {
-		this.userlastname = userlastname;
-	}
-
-	public String getDateAlta() {
-		return dateAlta;
-	}
-
-	public void setDateAlta(String dateAlta) {
-		this.dateAlta = dateAlta;
-	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", userlastname=" + userlastname + ", email=" + email
-				+ ", password=" + password + ", dateAlta=" + dateAlta + ", enabled=" + enabled + ", roles=" + roles
-				+ "]";
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", enabled=" + enabled + ", roles=" + roles + "]";
 	}
-
-	
 
 }
