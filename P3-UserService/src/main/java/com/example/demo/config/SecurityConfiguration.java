@@ -19,7 +19,7 @@ import com.example.demo.security.TipoPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
+	/*@Autowired
 	@Qualifier("lame")
 	private TipoPasswordEncoder encoder;
 
@@ -74,6 +74,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web
 			.ignoring()
 			.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-	}
+	}*/
 
 }
