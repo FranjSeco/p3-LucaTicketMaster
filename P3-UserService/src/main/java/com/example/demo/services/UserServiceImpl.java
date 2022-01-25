@@ -3,7 +3,6 @@ package com.example.demo.services;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import javax.management.relation.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +12,8 @@ import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 
-
+import com.example.demo.security.TipoPasswordEncoder;
+import com.example.demo.model.Role;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,6 +22,12 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	//lame|hash
+	@Qualifier("lame")
+	private TipoPasswordEncoder encoder;
+	
 	@Override
 	public User findUserByUsername(String username) {
 		
@@ -33,8 +39,14 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public void saveUser(User user) {
-		// TODO Auto-generated method stub
+		System.out.println("---- Pwd: " + encoder.encode(user.getPassword()));
+		user.setPassword(encoder.encode(user.getPassword()));
+		user.setEnabled(true);
+		Role userRole = roleRepository.findByRole("USER");
+		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		
+		System.out.println("User is ready: " + user);
+		userRepository.save(user);
 	}
 	
 	
