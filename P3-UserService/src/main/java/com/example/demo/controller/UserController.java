@@ -7,6 +7,12 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.User;
+import com.example.demo.response.LoginDto;
 import com.example.demo.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,6 +49,9 @@ public class UserController {
 	//DOC añadido autowired
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+    private AuthenticationManager authenticationManager;
 
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -68,6 +78,20 @@ public class UserController {
 		logger.info("------ readStudent (GET) ");
 		return userService.findById(id).orElseThrow(UserNotFoundException::new);
 	}
+	@GetMapping
+	
+	@PostMapping(value="/login")
+	public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+    }
+	
+	
+	
+	
 	@PostMapping(value = "/register")
 	public User addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
 		User userExists = userService.findUserByUsername(user.getUsername());

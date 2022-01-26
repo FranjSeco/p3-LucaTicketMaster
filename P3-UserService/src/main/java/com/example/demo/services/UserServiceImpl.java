@@ -4,9 +4,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.hibernate.mapping.Collection;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
@@ -61,8 +67,15 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	}
 
+	  @Override
+	    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+	       User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
+	               .orElseThrow(() ->
+	                       new UsernameNotFoundException("User not found with username or email:" + usernameOrEmail));
+	        return new org.springframework.security.core.userdetails.User(user.getEmail(),
+	                user.getPassword(), null);
+	    }
 
-	
 	
 
 }
