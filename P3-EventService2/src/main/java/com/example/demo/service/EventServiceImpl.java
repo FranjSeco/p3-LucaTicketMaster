@@ -66,6 +66,16 @@ public class EventServiceImpl implements EventService {
 		
 		return eventAdapter.of(eUpdater);
 	}
+
+	@Override
+	public EventResponse deleteEvent(String name) {
+		// TODO Auto-generated method stub
+		EventModel eUpdater = eventRepository.findByName(name);
+		
+		eventRepository.deleteById(eUpdater.getId());
+		
+		return eventAdapter.of(eUpdater);
+	}
     
     
 } 
