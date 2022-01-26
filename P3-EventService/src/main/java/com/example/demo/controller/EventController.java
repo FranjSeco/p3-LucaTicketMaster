@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.repository.EventRepository;
+import com.example.demo.repository.EventRepo;
 import com.example.demo.response.EventResponse;
 import com.example.demo.service.EventService;
 
@@ -17,7 +17,7 @@ import com.example.demo.service.EventService;
 public class EventController {
 	
 	@Autowired
-	private EventRepository eventRepository;
+	private EventRepo eventRepository;
 	
 	@Autowired 
 	private EventService eventService;

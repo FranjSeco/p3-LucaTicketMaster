@@ -16,7 +16,7 @@ public interface EventService {
 	//Delete Events
 	public void deleteEvent(String name);
 	
-	//Print details in a redeable form 
+	//Print details in a readable form 
 	public String getItemDetails(EventModel event);
 	
 	// Add events manually

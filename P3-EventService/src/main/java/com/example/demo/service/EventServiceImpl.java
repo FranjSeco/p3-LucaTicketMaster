@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.EventModel;
-import com.example.demo.repository.EventRepository;
+import com.example.demo.repository.EventRepo;
 
 @Service
 public class EventServiceImpl implements EventService {
 	
     @Autowired
-    EventRepository eventItemRepo;
+    EventRepo eventItemRepo;
 	
     
     // Create event items
