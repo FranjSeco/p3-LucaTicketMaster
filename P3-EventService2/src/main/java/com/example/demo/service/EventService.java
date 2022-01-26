@@ -13,4 +13,10 @@ public interface EventService  {
 	
 	// Add event
 	public EventResponse addEvent(EventModel event);
+	
+	// Get details
+	public EventResponse getDetails(String name);
+	
+	// Modify Event
+	public EventResponse findByIdAndUpdate(String id, EventModel event);
 }
