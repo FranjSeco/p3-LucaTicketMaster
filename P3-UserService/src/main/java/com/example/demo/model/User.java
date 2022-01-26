@@ -18,8 +18,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String username;
+	private String userlastname;
 	private String email;
 	private String password;
+	//private String date;
 	private Boolean enabled;
 
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -28,6 +30,8 @@ public class User {
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<Role> roles;
+
+	
 
 	public Long getId() {
 		return id;
@@ -80,11 +84,33 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
+	
+
+	public String getUserlastname() {
+		return userlastname;
+	}
+
+	public void setUserlastname(String userlastname) {
+		this.userlastname = userlastname;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", enabled=" + enabled + ", roles=" + roles + "]";
+		return "User [id=" + id + ", username=" + username + ", userlastname=" + userlastname + ", email=" + email
+				+ ", password=" + password + ", enabled=" + enabled + ", roles=" + roles + "]";
 	}
+
+	/*public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}*/
+
+	
+
+	
 
 }

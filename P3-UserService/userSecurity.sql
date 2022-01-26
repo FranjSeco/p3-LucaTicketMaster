@@ -51,8 +51,10 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
+  `userlastname` varchar(45) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
+
   `enabled` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -64,7 +66,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'falken','$2a$10$zR7z8/ZnCP79p9NNgoRojOnNiyIcT/HfSLMqAhGmBGsuQB9iOhzqa','falken@mit.edu',1),(2,'john_doe','$2a$10$zR7z8/ZnCP79p9NNgoRojOnNiyIcT/HfSLMqAhGmBGsuQB9iOhzqa','jdoe@ge.us',1),(3,'nobody','$2a$10$zR7z8/ZnCP79p9NNgoRojOnNiyIcT/HfSLMqAhGmBGsuQB9iOhzqa','no@no.org',1),(4,'antonio','antonio','antonio',1),(5,'l','l','l',1),(6,'m','$2a$10$zMEnv6kcJBk82HPmluBIGeK5jZJlYuuKwEo10K9ALjNFTdunEUXuS','m',1),(7,'a','a','a',1);
+INSERT INTO `user` VALUES ();
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +91,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1,2),(2,1,3),(3,2,2),(4,3,2),(5,4,2),(6,5,3),(7,6,3),(8,7,3);
+INSERT INTO `user_role` VALUES ();
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
