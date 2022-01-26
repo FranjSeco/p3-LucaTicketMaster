@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,12 +69,16 @@ public class UserController {
 		return userService.findById(id).orElseThrow(UserNotFoundException::new);
 	}
 	@PostMapping(value = "/register")
-	public User addUser(@RequestBody User user, BindingResult bindingResult, Model model) {
+	public User addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
 		User userExists = userService.findUserByUsername(user.getUsername());
 		if (userExists != null) {
+			logger.info("------ usuario ya existente ");
 			return null;
 		} else {
-			return userService.saveUser(user);
+			logger.info("------ addUser (POST)");
+			User result = userService.saveUser(user);
+			logger.info("------ Dato Salvado " + result);
+			return result;
 		}
 	}
 
