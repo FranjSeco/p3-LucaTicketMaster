@@ -50,8 +50,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-    private AuthenticationManager authenticationManager;
+	//@Autowired
+   // private AuthenticationManager authenticationManager;
 
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -75,20 +75,25 @@ public class UserController {
 	public User GetUsers(
 			@Parameter(description = "ID del user a localizar", required=true) 
 			@PathVariable Long id) {			
-		logger.info("------ readStudent (GET) ");
+		logger.info("------GetUsers (GET) ");
 		return userService.findById(id).orElseThrow(UserNotFoundException::new);
 	}
 	
-	@GetMapping
+	
 	
 	@PostMapping(value="/login")
-	public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
-        return null;
+    public User loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+        List<User> userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 
+        if (userExists != null) {
+            logger.info("------ login  ");
+            return user;
+        } else {
+            logger.info("------ no esta en la base : registrate");
+
+            return null;
+        }
     }
-	
 	
 	
 	
