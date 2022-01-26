@@ -15,8 +15,7 @@ public interface UserService {
 	public User findUserByUsername(String username);
 	public User findUserByEmail(String email);
 	public User saveUser(User user);
-	//para el login
-	public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException;
+
 	
 	
 
