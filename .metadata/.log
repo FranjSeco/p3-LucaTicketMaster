@@ -821,3 +821,154 @@ Binding(ALT+COMMAND+R,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,cocoa,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:25.839
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:25.843
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@5642f3a1[org.springframework.tooling.boot.ls:1.29.0.202112031705(id=458)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:25.848
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:25.941
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.eclipse.lsp4e 2 0 2022-01-26 12:40:38.292
+!MESSAGE Javadoc unavailable. Failed to obtain it.
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:386)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2096)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.eclipse.jface.text 4 0 2022-01-26 12:40:38.719
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.NullPointerException: Cannot read the array length because "this.methods" is null
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.getMethods(BinaryTypeBinding.java:1492)
+	at org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding.setMethodBindings(AnnotationBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createAnnotation(LookupEnvironment.java:995)
+	at org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding.buildRetentionAnnotation(AnnotationBinding.java:134)
+	at org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding.addStandardAnnotations(AnnotationBinding.java:89)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.retrieveAnnotations(BinaryTypeBinding.java:1855)
+	at org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding.getAnnotations(ReferenceBinding.java:1067)
+	at org.eclipse.jdt.core.dom.TypeBinding.getAnnotations(TypeBinding.java:122)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getAnnotations(JavadocHover.java:1177)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.addAnnotations(JavadocHover.java:1137)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:745)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:666)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:658)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.504
+!MESSAGE Boot LS startup time from start to initialized: 15632ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.791
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.VGJjCvDaisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.801
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.809
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.810
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.810
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.812
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.VGJjCvDa => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.824
+!MESSAGE classpath=122 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.829
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa P3-UserService false 122
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.831
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.833
+!MESSAGE classpath=50 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.835
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa P3-ConfigServer false 50
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.835
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.842
+!MESSAGE classpath=50 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.843
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa P3-EventService false 50
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.844
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.850
+!MESSAGE classpath=50 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.851
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa P3-LucaTicketMaster false 50
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.852
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.857
+!MESSAGE classpath=83 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.858
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa Spring13a-RestStudent-CRUD false 83
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.859
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.865
+!MESSAGE classpath=87 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.867
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa Spring13c-RestStudent-ErrorAdvice false 87
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.868
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.869
+!MESSAGE classpath=1 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.869
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa Spring15d-SecurityBBDD false 1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.870
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.871
+!MESSAGE classpath=1 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.872
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa Spring15e-SecurityBBDDRest false 1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.873
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.883
+!MESSAGE classpath=140 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.887
+!MESSAGE buffering callback sts4.classpath.VGJjCvDa Spring18d-Cart false 140
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:41.888
+!MESSAGE executing callback sts4.classpath.VGJjCvDa 9 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-01-26 12:40:43.617
+!MESSAGE executing callback sts4.classpath.VGJjCvDa SUCCESS [done]

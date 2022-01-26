@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		.authorizeRequests()
 		.antMatchers("/login").permitAll()
+		.antMatchers("/v3/api-docs").permitAll()
+		.antMatchers("/swagger-ui/**").permitAll()
 		.antMatchers("/users/**").permitAll()
 		.antMatchers("/console/**").permitAll()
 		.antMatchers("/register").permitAll()
@@ -79,7 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web
 			.ignoring()
-			.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+			.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/swagger-ui/**", "/v3/api-docs/**");
 	}
 
 }
