@@ -1,18 +1,21 @@
 package com.example.demo.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.EventModel;
-import com.example.demo.repository.EventDao;
+import com.example.demo.repository.EventRepository;
 
 @Service
+@Transactional
 public class EventServiceImpl implements EventService {
 	
-    @Autowired
-    EventDao eventItemRepo;
 	
+	/*
     
     // Create event items
     @Override
@@ -24,12 +27,16 @@ public class EventServiceImpl implements EventService {
         System.out.println("Data creation complete...");
 	}
 	
+
+
 	// Show all the vents
     @Override
-	public void showAllEvents() {
-		eventItemRepo.findAll().forEach(event -> System.out.println(getItemDetails(event)));
+	public List<EventModel> showAllEvents() {
+    	final List<EventModel> all = eventItemRepo.findAll();
+		return all;
 	}
-	
+    
+    
 	// Get events by name
     @Override
 	public EventModel getEventByName(String name) {
@@ -37,6 +44,7 @@ public class EventServiceImpl implements EventService {
 		EventModel event = eventItemRepo.findItemByName(name);
 		return event;
 	}
+	
 	
 	// Delete events
     @Override
@@ -68,5 +76,5 @@ public class EventServiceImpl implements EventService {
 	//Get events by location
 	
 	//Get events by genre
-	
+	*/
 }

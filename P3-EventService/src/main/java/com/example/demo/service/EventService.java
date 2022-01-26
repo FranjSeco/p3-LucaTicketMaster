@@ -1,15 +1,20 @@
 package com.example.demo.service;
 
+import java.util.List;
+
+
 import com.example.demo.model.EventModel;
 
+
 public interface EventService {
-	
+	/*
 	// Create default Events
 	public void createEventItems();
 	
 	// Show all the Events
-	public void showAllEvents();
+	public List<EventModel> showAllEvents();
 	
+	/*
 	//Get Events By Name
 	public EventModel getEventByName(String name);
 	
@@ -21,4 +26,5 @@ public interface EventService {
 	
 	// Add events manually
 	public void addEvent(String name, String date, String location, String genre);
+	*/
 }

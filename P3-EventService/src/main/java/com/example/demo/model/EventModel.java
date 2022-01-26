@@ -1,21 +1,38 @@
 package com.example.demo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "eventList")
 public class EventModel {
 	
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
     private String name;
     private String date;
     private String location;
     private String genre;
     
-    public EventModel(String name, String date, String location, String genre) {
+    public EventModel(String id, String name, String date, String location, String genre) {
+    	super();
+    	this.id = id;
+    	this.name = name;
+    	this.date = date;
+    	this.location = location;
+    	this.genre = genre;
+    }
+    
+    public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public EventModel(String name, String date, String location, String genre) {
     	super();
     	this.name = name;
     	this.date = date;

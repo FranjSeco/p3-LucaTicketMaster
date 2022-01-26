@@ -1,0 +1,31 @@
+package com.example.demo.adapter;
+
+
+
+import org.springframework.stereotype.Component;
+
+import com.example.demo.model.EventModel;
+import com.example.demo.response.EventResponse;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+@Component
+public class EventAdapter {
+
+	public EventResponse of(EventModel event) {
+		EventResponse eventResponse = new EventResponse();
+		eventResponse.setId(event.getId());
+		eventResponse.setName(event.getName());
+		eventResponse.setLocation(event.getLocation());
+		eventResponse.setGenre(event.getGenre());
+		return eventResponse;
+	}
+
+	public List<EventResponse> of(List<EventModel> events) {
+		return events.stream()
+			.map(p -> of(p))
+			.collect(Collectors.toList());
+		}
+}

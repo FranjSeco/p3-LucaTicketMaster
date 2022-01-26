@@ -15,6 +15,7 @@ public class EventResponse implements Serializable {
 	
 	private static Logger log = LoggerFactory.getLogger(EventResponse.class);
 	
+	private String id;
 	private String name;
 	private String date;
 	private String location;
@@ -22,12 +23,17 @@ public class EventResponse implements Serializable {
 	
 	public static EventResponse of(EventModel event) {
 		EventResponse e = new EventResponse();
+		e.setId(event.getId());
 		e.setName(event.getName());
 		e.setDate(event.getDate());
 		e.setLocation(event.getLocation());
 		e.setGenre(event.getGenre());
 		
 		return e;
+	}
+	
+	public static List<EventResponse> of1(List<EventModel> events) {
+		return events.stream().map(c -> of(c)).collect(Collectors.toList());
 	}
 
 	public static Logger getLog() {
@@ -37,7 +43,13 @@ public class EventResponse implements Serializable {
 	public static void setLog(Logger log) {
 		EventResponse.log = log;
 	}
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
