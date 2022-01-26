@@ -24,13 +24,13 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	
+	//Para hacer pruebas desde el postman
 	@GetMapping("/findall")
 	public List<User> GetUsers(){
 		return userService.findAll();
 	}
 	
-	
+	//Registrar nuevos usuarios
 	@PostMapping(value = "/register")
 	public User addUser(@RequestBody User user, BindingResult bindingResult, Model model) {
 		User userExists = userService.findUserByUsername(user.getUsername());

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Web : s04.dblogin</title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body class="container">
+	<h1>Spring security: Pagina Protected (Solo para role User)</h1>
+	<!-- Si esta autenticado se muestra el enlace -->
+	<div sec:authorize="isAuthenticated()" >
+		<a th:href="@{/logout}">Logout</a>
+	</div>
+	<p>This is a protected page. Es solo para USER</p>
+   <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+   <a th:href="@{/admin}">Go to admin... que no vas a poder</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Log Out"/>
+        </form>
+</body>
+</html>

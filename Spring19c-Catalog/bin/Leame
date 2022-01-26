@@ -1,0 +1,29 @@
+====================
+CLIENTE 01: CATALOGO
+====================
+
+Es el mismo Ejercicio que el 18c
+	He eliminado mucha info que había por medio
+	Se ha añadido
+		Feign Client (aqui no se ha hecho nada. solo donde hat RestTemplate)
+
+============
+Dependencias
+============
+
+spring-boot-starter-data-jpa
+spring-boot-starter-web
+spring-cloud-starter-config
+spring-cloud-starter-netflix-eureka-client
+
+========
+Pruebas
+========
+
+	(GET) http://localhost:7777/product/
+	(GET) http://localhost:7777/product/{id}
+	
+Está realizado con una BBDD HSQLSB (parecida a H2)
+	Cargar dependencia en el pom.xml
+	Incluir fichero data.sql en /resources 	
+

@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Web : s04.dblogin</title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body class="container">
+	<h1>Spring security: Pagina Pública</h1>
+	<p>This is a public page</p>
+   	<a th:href="@{/protected}">Go to protected (Solo para Role User)</a><br/>
+   	<a th:href="@{/admin}">Go to admin Page (Solo para Role Admin)</a>
+</body>
+</html>
