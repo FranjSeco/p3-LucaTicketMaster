@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.EventModel;
-import com.example.demo.repository.EventRepo;
+import com.example.demo.repository.EventDao;
 
 @Service
 public class EventServiceImpl implements EventService {
 	
     @Autowired
-    EventRepo eventItemRepo;
+    EventDao eventItemRepo;
 	
     
     // Create event items
@@ -32,9 +32,10 @@ public class EventServiceImpl implements EventService {
 	
 	// Get events by name
     @Override
-	public void getEventByName(String name) {
+	public EventModel getEventByName(String name) {
 		System.out.println("Getting event by name: " + name);
 		EventModel event = eventItemRepo.findItemByName(name);
+		return event;
 	}
 	
 	// Delete events

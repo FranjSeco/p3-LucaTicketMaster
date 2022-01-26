@@ -11,7 +11,7 @@ public interface EventService {
 	public void showAllEvents();
 	
 	//Get Events By Name
-	public void getEventByName(String name);
+	public EventModel getEventByName(String name);
 	
 	//Delete Events
 	public void deleteEvent(String name);

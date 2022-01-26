@@ -16,6 +16,7 @@ public class EventModel {
     private String genre;
     
     public EventModel(String name, String date, String location, String genre) {
+    	super();
     	this.name = name;
     	this.date = date;
     	this.location = location;
