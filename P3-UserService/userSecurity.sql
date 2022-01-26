@@ -54,7 +54,7 @@ CREATE TABLE `user` (
   `userlastname` varchar(45) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-
+`date`varchar(45) DEFAULT NULL,
   `enabled` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;

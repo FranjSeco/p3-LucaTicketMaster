@@ -21,7 +21,7 @@ public class User {
 	private String userlastname;
 	private String email;
 	private String password;
-	//private String date;
+	private String date;
 	private Boolean enabled;
 
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -95,19 +95,21 @@ public class User {
 		this.userlastname = userlastname;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", userlastname=" + userlastname + ", email=" + email
-				+ ", password=" + password + ", enabled=" + enabled + ", roles=" + roles + "]";
-	}
 
-	/*public String getDate() {
+
+	public String getDate() {
 		return date;
 	}
 
 	public void setDate(String date) {
 		this.date = date;
-	}*/
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", userlastname=" + userlastname + ", email=" + email
+				+ ", password=" + password + ", date=" + date + ", enabled=" + enabled + ", roles=" + roles + "]";
+	}
 
 	
 
