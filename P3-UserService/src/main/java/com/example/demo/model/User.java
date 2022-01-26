@@ -10,13 +10,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Size;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(name="User", description = "User Class")
 @Entity
 public class User {
 
+	@Schema(name= "id", 
+    		description = "Identificador unico para el usuario", 
+            example = "42", 
+            required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Size (min = 0, max = 30)
 	private String username;
 	private String userlastname;
 	private String email;
