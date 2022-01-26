@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.adapter.EventAdapter;
 import com.example.demo.controller.EventController;
 import com.example.demo.model.EventModel;
 import com.example.demo.repository.EventRepository;
+import com.example.demo.response.EventResponse;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -19,7 +21,9 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     EventRepository eventRepository;
-
+    
+    @Autowired
+    EventAdapter eventAdapter;
 
 	@Override
 	public List<EventModel> showAllEvents() {
@@ -29,6 +33,10 @@ public class EventServiceImpl implements EventService {
 		return eventRepository.findAll();
 	}
     
-
-
+    @Override
+    public EventResponse addEvent(EventModel event) {
+    	eventRepository.save(event);
+    	System.out.println("----------------" + event);
+    	return eventAdapter.of(event);
+    }
 } 
