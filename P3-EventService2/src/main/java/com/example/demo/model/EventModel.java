@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,10 +10,12 @@ public class EventModel {
 	
 	@Id
     private String id;
+	@NotEmpty(message = "El nombre no debe ser vacío")
     private String name;
     private String date;
     private String location;
     private String genre;
+    
     
     public EventModel(String id, String name, String date, String location, String genre) {
     	super();
