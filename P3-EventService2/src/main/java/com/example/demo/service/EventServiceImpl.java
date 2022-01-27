@@ -26,11 +26,11 @@ public class EventServiceImpl implements EventService {
     EventAdapter eventAdapter;
 
 	@Override
-	public List<EventModel> showAllEvents() {
+	public List<EventResponse> showAllEvents() {
 		// TODO Auto-generated method stub
 		log.info("Se accede al Servicio Impl");
 		System.out.println("-------------" + eventRepository.findAll());
-		return eventRepository.findAll();
+		return eventAdapter.of(eventRepository.findAll());
 	}
     
     @Override
