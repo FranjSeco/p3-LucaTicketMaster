@@ -9,7 +9,7 @@ import com.example.demo.response.EventResponse;
 public interface EventService  {
 	
 	// Show all the Events
-	public List<EventModel> showAllEvents();
+	public List<EventResponse> showAllEvents();
 	
 	// Add event
 	public EventResponse addEvent(EventModel event);
