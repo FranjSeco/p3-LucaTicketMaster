@@ -16,7 +16,7 @@ public interface UserService {
 	public User findUserByEmail(String email);
 	public User saveUser(User user);
 	public List<User> findByUsernameAndPassword(String username, String password);
-	
+	public User userBack(List<User> userExists);
 	
 
 }

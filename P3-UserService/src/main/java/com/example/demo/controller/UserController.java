@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -84,10 +85,10 @@ public class UserController {
 	@PostMapping(value="/login")
     public User loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
         List<User> userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-
+        User userBack = userService.userBack(userExists);
         if (userExists != null) {
             logger.info("------ login  ");
-            return user;
+            return userBack;
         } else {
             logger.info("------ no esta en la base : registrate");
 

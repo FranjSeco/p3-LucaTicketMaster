@@ -71,6 +71,11 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userRepository.findByUsernameAndPassword(username, password);
 	}
+	@Override
+	public User userBack(List<User> userExists) {
+		return userRepository.findAll( userExists);
+	}
+	
 	
 
 }
