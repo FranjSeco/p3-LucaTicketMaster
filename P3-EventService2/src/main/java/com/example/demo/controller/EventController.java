@@ -90,7 +90,7 @@ public class EventController {
    public EventResponse getDetails(@Parameter(description = "Name del event a localizar", required=true)
    @PathVariable String name) {
 	   log.info("------GetDetails (GET) ");
-	   EventResponse e= eventService.getDetails(name);
+	   EventResponse e = eventService.getDetails(name);
 	   if (e.getName().isEmpty()){
 		   throw new EventNotFoundException(name);
 	   }
@@ -126,7 +126,7 @@ public class EventController {
    public EventResponse deleteEvent(@Parameter(description = "Name del event a borrar", required=true)
    @PathVariable String name) {
 	   log.info("-----------deleteEvent  (DELETE)");
-	   EventResponse e= eventService.getDetails(name);
+	   EventResponse e = eventService.getDetails(name);
 	   if (e.getName().isEmpty()){
 		   throw new EventNotFoundException(name);
 	   }
