@@ -100,7 +100,7 @@ public class EventController {
    @DeleteMapping("/{name}")
    public EventResponse deleteEvent(@Parameter(description = "Name del event a borrar", required=true)
    @PathVariable String name) {
-	   log.info("-----------deleteEvent (DELETE)");
+	   log.info("-----------deleteEvent  (DELETE)");
 	   return eventService.deleteEvent(name);
    }
    
