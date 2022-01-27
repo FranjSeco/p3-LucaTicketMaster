@@ -1,10 +1,14 @@
 package com.example.demo.controller;
 
+import java.net.URI;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +18,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.controller.error.EventAlreadyExistsException;
+import com.example.demo.controller.error.EventIsIncompleteException;
+import com.example.demo.controller.error.EventNotFoundException;
 import com.example.demo.model.EventModel;
 import com.example.demo.response.EventResponse;
 import com.example.demo.service.EventService;
@@ -58,8 +66,20 @@ public class EventController {
 			@ApiResponse(responseCode = "404", description = "Evento no añadido, ruta incorrecta (NO implementado)", content = @Content) })
   
    @PostMapping("/add")
-   public EventResponse addEvent(@RequestBody EventModel event) {
-	   return eventService.addEvent(event);
+   public ResponseEntity<?> addEvent(@Valid @RequestBody EventModel event){
+	   log.info("------ addStudent (POST)");
+	   EventResponse check = eventService.getDetails(event.getName());
+	   if(check != null){
+		   throw new EventAlreadyExistsException(event.getName());
+	   }  else if (event.getName() == null || event.getDate() == null || event.getLocation() == null || event.getGenre() == null) {
+		   throw new EventIsIncompleteException(event.getName(), event.getDate(), event.getLocation(), event.getGenre());
+	   }
+	   EventResponse evento = this.eventService.addEvent(event);
+	   log.info("------ Dato Salvado " + evento);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{name}").buildAndExpand(evento.getName())
+				.toUri();
+		return ResponseEntity.created(location).build();
+	   
    }
    
    @Operation(summary = "Buscar eventos por nombre", description = "Dado un nombre devuelve un objeto EventResponse", tags= {"event"})
@@ -70,10 +90,15 @@ public class EventController {
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
    
    @GetMapping("/{name}")
-   public EventResponse getDetails(@Parameter(description = "Name del event a localizar", required=true) 
+   public EventResponse getDetails(@Parameter(description = "Name del event a localizar", required=true)
    @PathVariable String name) {
 	   log.info("------GetDetails (GET) ");
-	   return eventService.getDetails(name);
+
+	   EventResponse e= eventService.getDetails(name);
+	   if (e == null){
+		   throw new EventNotFoundException(name);
+	   }
+	   return e;
    }
    
    @Operation(summary = "Updatear eventos encontrados por nombre", description = "Dado un nombre permite modificar la información de dicho Evento", tags= {"event"})
@@ -87,6 +112,10 @@ public class EventController {
    public EventResponse modifyEvent(@Parameter(description = "Name del event a modificar", required=true)
    @PathVariable String name, @RequestBody EventModel event) {
 	   log.info("---------modifyEvent (PUT)");
+	   EventResponse check = eventService.getDetails(name);
+	   if (check == null){
+		   throw new EventNotFoundException(name);
+	   }
 	   return eventService.findByIdAndUpdate(name, event);
    }
    
@@ -101,7 +130,12 @@ public class EventController {
    public EventResponse deleteEvent(@Parameter(description = "Name del event a borrar", required=true)
    @PathVariable String name) {
 	   log.info("-----------deleteEvent  (DELETE)");
-	   return eventService.deleteEvent(name);
+
+	   EventResponse e= eventService.getDetails(name);
+	   if (e == null){
+		   throw new EventNotFoundException(name);
+	   }
+	   return e;
    }
    
 

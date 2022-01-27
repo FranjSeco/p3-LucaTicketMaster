@@ -1,4 +1,4 @@
-package com.example.demo.EventAdapter;
+package com.example.demo.eventAdapter;
 
 import java.util.List;
 import java.util.stream.Collectors;
