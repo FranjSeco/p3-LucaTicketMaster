@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 package com.example.demo.controller;
 
 import java.util.List;
@@ -351,4 +349,3 @@ public class UserController {
 	
 
 }
->>>>>>> 1a358005aa76882c22b3c6ccafde611b89e267e3
