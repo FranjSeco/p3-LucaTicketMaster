@@ -13,15 +13,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.EventModel;
 import com.example.demo.response.EventResponse;
 import com.example.demo.service.EventService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/events")
+@Tag(name = "events", description = "Events API")
 public class EventController {
 
    private static final Logger log = LoggerFactory.getLogger(EventController.class);
@@ -29,29 +37,70 @@ public class EventController {
    @Autowired
    private EventService eventService;
    
+   @Operation(summary = "Buscar todos los eventos", description = "Cuando se hace la petición se devuelve una List<EventResponse> ", tags= {"event"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Lista localizada", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Lista no encontrada (NO implementado)", content = @Content) })
+  
    @GetMapping
-   public List<EventModel> getAll() {
+   public List<EventResponse> getAll() {
 	   log.info("Se accede al controllador");
 	   return eventService.showAllEvents();
    }
    
+   @Operation(summary = "Añadir nuevo evento", description = "Dado un EventResponse, se añade a la Base de Datos", tags= {"event"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Evento añadido", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no añadido, ruta incorrecta (NO implementado)", content = @Content) })
+  
    @PostMapping("/add")
    public EventResponse addEvent(@RequestBody EventModel event) {
 	   return eventService.addEvent(event);
    }
    
+   @Operation(summary = "Buscar eventos por nombre", description = "Dado un nombre devuelve un objeto EventResponse", tags= {"event"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Evento localizado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
+   
    @GetMapping("/{name}")
-   public EventResponse getDetails(@PathVariable String name) {
+   public EventResponse getDetails(@Parameter(description = "Name del event a localizar", required=true) 
+   @PathVariable String name) {
+	   log.info("------GetDetails (GET) ");
 	   return eventService.getDetails(name);
    }
    
+   @Operation(summary = "Updatear eventos encontrados por nombre", description = "Dado un nombre permite modificar la información de dicho Evento", tags= {"event"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Evento actualizado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
+  
    @PutMapping("/{name}")
-   public EventResponse modifyEvent(@PathVariable String name, @RequestBody EventModel event) {
+   public EventResponse modifyEvent(@Parameter(description = "Name del event a modificar", required=true)
+   @PathVariable String name, @RequestBody EventModel event) {
+	   log.info("---------modifyEvent (PUT)");
 	   return eventService.findByIdAndUpdate(name, event);
    }
    
+   @Operation(summary = "Eliminar eventos por nombre", description = "Dado un nombre elimina ese objeto EventResponse", tags= {"event"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Evento eliminado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
+  
    @DeleteMapping("/{name}")
-   public EventResponse deleteEvent(@PathVariable String name) {
+   public EventResponse deleteEvent(@Parameter(description = "Name del event a borrar", required=true)
+   @PathVariable String name) {
+	   log.info("-----------deleteEvent (DELETE)");
 	   return eventService.deleteEvent(name);
    }
    
