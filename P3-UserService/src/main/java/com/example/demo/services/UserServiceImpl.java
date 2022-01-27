@@ -67,8 +67,9 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	}
 	@Override
-	public List<User> findByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
+	public User findByUsernameAndPassword(String username, String password) {
+		
 		return userRepository.findByUsernameAndPassword(username, password);
 	}
+
 }

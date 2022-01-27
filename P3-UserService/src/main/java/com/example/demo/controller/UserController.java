@@ -7,12 +7,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -24,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.User;
-import com.example.demo.response.LoginDto;
 import com.example.demo.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -83,11 +76,11 @@ public class UserController {
 	
 	@PostMapping(value="/login")
     public User loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
-        List<User> userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-
+        User userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        //User userBack = userService.userBack(userExists);
         if (userExists != null) {
             logger.info("------ login  ");
-            return user;
+            return userExists;
         } else {
             logger.info("------ no esta en la base : registrate");
 
@@ -114,3 +107,4 @@ public class UserController {
 	
 
 }
+
