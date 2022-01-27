@@ -68,7 +68,7 @@ public class EventController {
    public ResponseEntity<?> addEvent(@Valid @RequestBody EventModel event){
 	   log.info("------ addStudent (POST)");
 	   EventResponse check= eventService.getDetails(event.getName());
-	   if(check.getName().isEmpty()==false){
+	   if(check != null){
 		   throw new EventAlreadyExistsException(event.getName());
 	   }
 	   EventResponse evento= this.eventService.addEvent(event);
@@ -90,8 +90,9 @@ public class EventController {
    public EventResponse getDetails(@Parameter(description = "Name del event a localizar", required=true)
    @PathVariable String name) {
 	   log.info("------GetDetails (GET) ");
-	   EventResponse e = eventService.getDetails(name);
-	   if (e.getName().isEmpty()){
+
+	   EventResponse e= eventService.getDetails(name);
+	   if (e == null){
 		   throw new EventNotFoundException(name);
 	   }
 	   return e;
@@ -109,7 +110,7 @@ public class EventController {
    @PathVariable String name, @RequestBody EventModel event) {
 	   log.info("---------modifyEvent (PUT)");
 	   EventResponse check=eventService.getDetails(name);
-	   if (check.getName().isEmpty()){
+	   if (check == null){
 		   throw new EventNotFoundException(name);
 	   }
 	   return eventService.findByIdAndUpdate(name, event);
@@ -126,8 +127,9 @@ public class EventController {
    public EventResponse deleteEvent(@Parameter(description = "Name del event a borrar", required=true)
    @PathVariable String name) {
 	   log.info("-----------deleteEvent  (DELETE)");
-	   EventResponse e = eventService.getDetails(name);
-	   if (e.getName().isEmpty()){
+
+	   EventResponse e= eventService.getDetails(name);
+	   if (e == null){
 		   throw new EventNotFoundException(name);
 	   }
 	   return e;
