@@ -19,16 +19,6 @@ public class EventResponse implements Serializable {
 	private String genre;
 
 	
-	/*public static EventResponse of(UserResponse userR) {
-		EventResponse u = new EventResponse();
-		u.setId(userR.getId());
-		u.setName(userR.getName());
-		u.setDate(userR.getDate());
-		u.setLocation(userR.geLocation);
-		return u;
-	}*/
-	
-	
 	public String getId() {
 		return id;
 	}
