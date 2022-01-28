@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.controller.error.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.services.UserService;
 
