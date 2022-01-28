@@ -34,7 +34,7 @@ class ShouldNotRegisterIfUserAlreadyExists {
 		user.setPassword("Clau@");
 		user.setDate("1991");
 	
-		assertThat(user.equals(uRepo.findById(12L)));
+		//assertThat(user.equals(uRepo.findById(12L)));
 	}
 	
 	
