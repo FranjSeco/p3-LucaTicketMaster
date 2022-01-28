@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.controller.error.EventAlreadyExistsException;
-import com.example.demo.controller.error.EventIsIncompleteException;
 import com.example.demo.controller.error.EventNotFoundException;
 import com.example.demo.model.EventModel;
 import com.example.demo.response.EventResponse;
@@ -66,15 +66,13 @@ public class EventController {
 			@ApiResponse(responseCode = "404", description = "Evento no añadido, ruta incorrecta (NO implementado)", content = @Content) })
   
    @PostMapping("/add")
-   public ResponseEntity<?> addEvent(@Valid @RequestBody EventModel event){
+   public ResponseEntity<?> addEvent(@Valid  @RequestBody EventModel event){
 	   log.info("------ addStudent (POST)");
-	   EventResponse check = eventService.getDetails(event.getName());
+	   EventResponse check= eventService.getDetails(event.getName());
 	   if(check != null){
 		   throw new EventAlreadyExistsException(event.getName());
-	   }  else if (event.getName() == null || event.getDate() == null || event.getLocation() == null || event.getGenre() == null) {
-		   throw new EventIsIncompleteException(event.getName(), event.getDate(), event.getLocation(), event.getGenre());
 	   }
-	   EventResponse evento = this.eventService.addEvent(event);
+	   EventResponse evento= this.eventService.addEvent(event);
 	   log.info("------ Dato Salvado " + evento);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{name}").buildAndExpand(evento.getName())
 				.toUri();
@@ -93,7 +91,6 @@ public class EventController {
    public EventResponse getDetails(@Parameter(description = "Name del event a localizar", required=true)
    @PathVariable String name) {
 	   log.info("------GetDetails (GET) ");
-
 	   EventResponse e= eventService.getDetails(name);
 	   if (e == null){
 		   throw new EventNotFoundException(name);
@@ -112,7 +109,7 @@ public class EventController {
    public EventResponse modifyEvent(@Parameter(description = "Name del event a modificar", required=true)
    @PathVariable String name, @RequestBody EventModel event) {
 	   log.info("---------modifyEvent (PUT)");
-	   EventResponse check = eventService.getDetails(name);
+	   EventResponse check=eventService.getDetails(name);
 	   if (check == null){
 		   throw new EventNotFoundException(name);
 	   }
@@ -130,7 +127,6 @@ public class EventController {
    public EventResponse deleteEvent(@Parameter(description = "Name del event a borrar", required=true)
    @PathVariable String name) {
 	   log.info("-----------deleteEvent  (DELETE)");
-
 	   EventResponse e= eventService.getDetails(name);
 	   if (e == null){
 		   throw new EventNotFoundException(name);
