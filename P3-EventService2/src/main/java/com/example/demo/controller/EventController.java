@@ -131,6 +131,7 @@ public class EventController {
 	   if (e == null){
 		   throw new EventNotFoundException(name);
 	   }
+	   eventService.deleteEvent(name);
 	   return e;
    }
    
