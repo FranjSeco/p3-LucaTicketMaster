@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
-
+import com.example.demo.response.UserResponse;
 import com.example.demo.security.TipoPasswordEncoder;
 import com.example.demo.model.Role;
 
@@ -72,5 +72,14 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsernameAndPassword(username, password);
 	}
 	
-
+	
+	@Override
+	public User deleteUser(String username) {
+		User userDelete = userRepository.findByUsername(username);
+		
+		userRepository.deleteById(userDelete.getId());
+		
+		return userDelete;
+	}
+	
 }
