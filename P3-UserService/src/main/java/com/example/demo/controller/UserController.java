@@ -100,8 +100,6 @@ public class UserController {
         }
     }
 	
-	
-	
 	@PostMapping(value = "/register")
 	public User addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
 		User userExists = userService.findUserByUsername(user.getUsername());
