@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.EventAdapter.EventAdapter;
 import com.example.demo.controller.EventController;
+import com.example.demo.eventAdapter.EventAdapter;
 import com.example.demo.model.EventModel;
 import com.example.demo.repository.EventRepository;
 import com.example.demo.response.EventResponse;
