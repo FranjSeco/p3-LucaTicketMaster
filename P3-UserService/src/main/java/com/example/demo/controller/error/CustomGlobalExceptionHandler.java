@@ -22,15 +22,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 
 	// @ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler(EventNotFoundException.class)
+	@ExceptionHandler(UserNotFoundException.class)
 	public void springHandleNotFound(HttpServletResponse response) throws IOException {
-		logger.info("------ EventNotFoundException() ");
+		logger.info("------ UsertNotFoundException() ");
 		response.sendError(HttpStatus.NOT_FOUND.value());
 	}
 
@@ -89,3 +88,4 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	}
 
 }
+

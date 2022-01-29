@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.controller.error.IncorrectPasswordException;
+import com.example.demo.controller.error.UserAlreadyExistsException;
+import com.example.demo.controller.error.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.services.UserService;
 
@@ -82,8 +86,16 @@ public class UserController {
             logger.info("------ login  ");
             return userExists;
         } else {
+           
+            Optional<User> check =userService.findById(user.getId());
+            if (check.get().getUsername()== null) {
+            	throw new UserNotFoundException();
+            }
+            if (check.get().getPassword()!=user.getPassword()) {
+            	
+            	throw new IncorrectPasswordException(user.getUsername());
+            }
             logger.info("------ no esta en la base : registrate");
-
             return null;
         }
     }
@@ -95,7 +107,7 @@ public class UserController {
 		User userExists = userService.findUserByUsername(user.getUsername());
 		if (userExists != null) {
 			logger.info("------ usuario ya existente ");
-			return null;
+			throw new UserAlreadyExistsException(user.getUsername());
 		} else {
 			logger.info("------ addUser (POST)");
 			User result = userService.saveUser(user);
