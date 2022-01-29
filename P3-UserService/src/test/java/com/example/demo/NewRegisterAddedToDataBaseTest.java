@@ -1,6 +1,7 @@
 package com.example.demo;
 
-import static org.assertj.core.api.Assertions.assertThat;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -13,13 +14,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.services.UserService;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest()
 @TestMethodOrder(OrderAnnotation.class)
-class ShouldNotRegisterIfUserAlreadyExists {
+class NewRegisterAddedToDataBaseTest {
 	
+	//Este test sustituiría el Test databaseSizeShouldIncreaseByOne()
 	
 	@Autowired
 	UserRepository uRepo;
@@ -27,23 +29,19 @@ class ShouldNotRegisterIfUserAlreadyExists {
 	
 	@Test
 	@Order(1)
-	public void UserAlreadyExistsTest () {
-		
-		User user = uRepo.findByUsername("Claudia");
-		
-		assertThat(user.getUsername()).isEqualToIgnoringCase("Claudia");
-		/*User user = new User();
+	public void testNewUserAdded () {
+		User user = new User();
 	
-		user.setId(12L);
-		user.setUsername("Claudia");
-		user.setUserlastname("Leon");
-		user.setEmail("65767");
-		user.setPassword("Clau@");
-		user.setDate("1991");
+		user.setId(13L);
+		user.setUsername("Bilbo");
+		user.setUserlastname("Bolson");
+		user.setEmail("bilbo@");
+		user.setPassword("33333");
+		user.setDate("2890");
+	
+		uRepo.save(user);
 		
-		
-		
-		assertThat(user.equals(uRepo.findByUsername("Claudia")));*/
+		assertNotNull(uRepo.findByUsername("Bilbo").getUsername());
 	}
 	
 	
