@@ -1,5 +1,9 @@
 package com.example.demo.UserAdapter;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.User;
@@ -19,6 +23,16 @@ public class UserAdapter {
 		userResponse.setDate(user.getDate());
 		
 		return userResponse;
+	}
+	public List<UserResponse> of(List<User> users) {
+		return users.stream()
+				.map(p -> of(p))
+				.collect(Collectors.toList());
+	}
+	public Optional<UserResponse> of(Optional<User> usersId) {
+		return usersId.stream()
+				.map(p -> of(p))
+				.findAny();
 	}
 	
 }

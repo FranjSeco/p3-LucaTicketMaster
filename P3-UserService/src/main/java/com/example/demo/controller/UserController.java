@@ -67,7 +67,7 @@ public class UserController {
 	
 	//Para hacer pruebas desde el postman
 	@GetMapping("/findall")
-	public List<User> GetUsers(){
+	public List<UserResponse> GetUsers(){
 		return userService.findAll();
 	}
 	
@@ -77,28 +77,30 @@ public class UserController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
+	
 	//Registrar nuevos usuarios
 	@GetMapping("/{id}")
 	
-	public User GetUsers(
+	public UserResponse GetUsers(
 			@Parameter(description = "ID del user a localizar", required=true) 
 			@PathVariable Long id) {			
 		logger.info("------GetUsers (GET) ");
+		
 		return userService.findById(id).orElseThrow(UserNotFoundException::new);
 	}
 	
-	
+	//Entrar a la página
 	
 	@PostMapping(value="/login")
-    public User loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
-		User userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    public UserResponse loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+		UserResponse userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         //User userBack = userService.userBack(userExists);
         if (userExists != null) {
             logger.info("------ login  ");
             return userExists;
         } else {
            
-            Optional<User> check =userService.findById(user.getId());
+            Optional <UserResponse> check =userService.findById(user.getId());
             if (check.get().getUsername()== null) {
             	throw new UserNotFoundException();
             }
@@ -119,8 +121,8 @@ public class UserController {
 	
 	
 	@PostMapping(value = "/register")
-	public User addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
-		User userExists = userService.findUserByUsername(user.getUsername());
+	public UserResponse addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+		UserResponse userExists = userService.findUserByUsername(user.getUsername());
 		
 		
 		if (userExists != null) {
@@ -133,20 +135,18 @@ public class UserController {
 		
 		} else {
 			logger.info("------ addUser (POST)");
-			User result = userService.saveUser(user);
+			UserResponse result = userService.saveUser(user);
 			logger.info("------ Dato Salvado " + result);
 			return result;
 		}
 	}
-
 	
 	@DeleteMapping("/{username}")
-	public User deleteUser(@PathVariable String username) {
+	public UserResponse deleteUser(@PathVariable String username) {
 		
 		userService.deleteUser(username);
 		return null;
-		
-		
+				
 	}
 	
 	
