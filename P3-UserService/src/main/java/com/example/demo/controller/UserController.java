@@ -23,6 +23,7 @@ import com.example.demo.controller.error.IncorrectPasswordException;
 import com.example.demo.controller.error.UserAlreadyExistsException;
 import com.example.demo.controller.error.UserNotFoundException;
 import com.example.demo.model.User;
+import com.example.demo.response.UserResponse;
 import com.example.demo.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -81,7 +82,7 @@ public class UserController {
 	
 	@PostMapping(value="/login")
     public User loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
-        User userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		User userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         //User userBack = userService.userBack(userExists);
         if (userExists != null) {
             logger.info("------ login  ");
