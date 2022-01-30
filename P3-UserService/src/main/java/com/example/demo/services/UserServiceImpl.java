@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		
 		System.out.println("User is ready: " + user);
-		//userRepository.save(user);
+		
 		return userRepository.save(user);
 	}
 	@Override
