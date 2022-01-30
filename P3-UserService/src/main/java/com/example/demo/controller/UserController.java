@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.validation.Valid;
 
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.controller.error.EmailAlreadyExistsException;
 import com.example.demo.controller.error.IncorrectPasswordException;
 import com.example.demo.controller.error.UserAlreadyExistsException;
 import com.example.demo.controller.error.UserNotFoundException;
 import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,6 +51,9 @@ public class UserController {
 	//DOC añadido autowired
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	//@Autowired
    // private AuthenticationManager authenticationManager;
@@ -101,14 +108,27 @@ public class UserController {
         }
     }
 	
+	//Email único
+	private boolean emailExists(String email) {
+		return userRepository.findByEmail(email) != null;
+	}
+	
+	
 	
 	
 	@PostMapping(value = "/register")
 	public User addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
 		User userExists = userService.findUserByUsername(user.getUsername());
+		
+		
 		if (userExists != null) {
 			logger.info("------ usuario ya existente ");
 			throw new UserAlreadyExistsException(user.getUsername());
+			
+		} if (emailExists(user.getEmail())) {
+			throw new EmailAlreadyExistsException(user.getEmail());
+			
+		
 		} else {
 			logger.info("------ addUser (POST)");
 			User result = userService.saveUser(user);

@@ -4,23 +4,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.hibernate.mapping.Collection;
-import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.response.UserResponse;
 import com.example.demo.security.TipoPasswordEncoder;
-import com.example.demo.model.Role;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -80,5 +73,8 @@ public class UserServiceImpl implements UserService {
 		
 		return userDelete;
 	}
+	
+	
+	
 	
 }
