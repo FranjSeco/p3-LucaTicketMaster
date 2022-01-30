@@ -14,7 +14,8 @@ public class UserResponse implements Serializable{
 	private Long id;
 
 	private String username;
-	private String userlastname;
+	private String name;
+	private String lastname;
 	private String email;
 	private String password;
 	private String date;
@@ -35,6 +36,22 @@ public class UserResponse implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String userlastname) {
+		this.lastname = userlastname;
+	}
 
 	public String getPassword() {
 		return password;
@@ -51,6 +68,14 @@ public class UserResponse implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public Boolean isEnabled() {
 		return enabled;
@@ -64,21 +89,11 @@ public class UserResponse implements Serializable{
 		this.enabled = enabled;
 	}
 
+	
 
-	public String getUserlastname() {
-		return userlastname;
-	}
 
-	public void setUserlastname(String userlastname) {
-		this.userlastname = userlastname;
-	}
+	
 
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
+	
 
 }

@@ -51,13 +51,14 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
-  `userlastname` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `lastname` varchar(45) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-`date`varchar(45) DEFAULT NULL,
+  `date`varchar(45) DEFAULT NULL,
   `enabled` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
