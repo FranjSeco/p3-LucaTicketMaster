@@ -4,31 +4,28 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.hibernate.mapping.Collection;
-import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.UserAdapter.UserAdapter;
+import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
-
+import com.example.demo.response.UserResponse;
 import com.example.demo.security.TipoPasswordEncoder;
-import com.example.demo.model.Role;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	UserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	UserAdapter userAdapter;
 	
 	@Autowired
 	//lame|hash
@@ -36,26 +33,26 @@ public class UserServiceImpl implements UserService {
 	private TipoPasswordEncoder encoder;
 	
 	@Override
-	public List<User> findAll(){
-		return userRepository.findAll();
+	public List<UserResponse> findAll() {
+		return userAdapter.of(userRepository.findAll()); 
 	}
 	@Override
-	public Optional<User> findById(long id) {
-		
-		return userRepository.findById(id);
+	public Optional<UserResponse> findById(Long id) {
+		return userAdapter.of(userRepository.findById(id));
 	}
 	
+	
 	@Override
-	public User findUserByUsername(String username) {
+	public UserResponse findUserByUsername(String username) {
 		
-		return userRepository.findByUsername(username);
+		return userAdapter.of(userRepository.findByUsername(username)) ;
 	}
 	@Override
-	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+	public UserResponse findUserByEmail(String email) {
+		return userAdapter.of(userRepository.findByEmail(email));
 	}
 	@Override
-	public User saveUser(User user) {
+	public UserResponse saveUser(User user) {
 		System.out.println("---- Pwd: " + encoder.encode(user.getPassword()));
 		user.setPassword(encoder.encode(user.getPassword()));
 		user.setEnabled(true);
@@ -63,13 +60,28 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		
 		System.out.println("User is ready: " + user);
-		//userRepository.save(user);
-		return userRepository.save(user);
+		
+		return userAdapter.of(userRepository.save(user));
 	}
 	@Override
-	public User findByUsernameAndPassword(String username, String password) {
+	public UserResponse findByUsernameAndPassword(String username, String password) {
 		
-		return userRepository.findByUsernameAndPassword(username, password);
+		return userAdapter.of(userRepository.findByUsernameAndPassword(username, password));
+	}
+	
+	
+	@Override
+	public UserResponse deleteUser(String username) {
+		
+		User userDelete = userRepository.findByUsername(username);
+		
+		userRepository.deleteById(userDelete.getId());
+		
+		return userAdapter.of(userDelete);
 	}
 
+	
+	
+	
+	
 }
