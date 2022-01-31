@@ -7,7 +7,7 @@ private static final long serialVersionUID = 1L;
 		super("Fallo al registrarse, ya existe el usuario");
 	}
 	public UserAlreadyExistsException(String name) {
-		super("Fallo al registrarse, ya existe el usuario" + name);
+		super("Fallo al registrarse, ya existe el usuario " + name);
 	}
 
 

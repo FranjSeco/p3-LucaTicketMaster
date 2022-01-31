@@ -25,15 +25,6 @@ public class EventModel {
     	this.location = location;
     	this.genre = genre;
     }
-    
-    public EventModel(String name, String date, String location, String genre) {
-    	super();
-    	this.name = name;
-    	this.date = date;
-    	this.location = location;
-    	this.genre = genre;
-    }
-
 
 	public String getId() {
 		return id;

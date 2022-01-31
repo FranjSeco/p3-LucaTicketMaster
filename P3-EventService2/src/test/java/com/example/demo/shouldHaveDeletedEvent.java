@@ -11,7 +11,7 @@ import com.example.demo.repository.EventRepository;
 import com.example.demo.service.EventService;
 
 @SpringBootTest
-class shouldHaveChangedEventName {
+public class shouldHaveDeletedEvent {
 	@Autowired
 	EventService eventServiceTest;
 	
@@ -22,11 +22,10 @@ class shouldHaveChangedEventName {
 	void contextLoads() {
 		// Given
 		EventModel newEvent = new EventModel("Testing1","Testing1","Testing1","Testing1","Testing1");
-		EventModel modifyEvent = new EventModel("Testing1","ModifiedName","Testing1","Testing1","Testing1");
 		
 		// When
 		eventRepositoryTest.save(newEvent);
-		eventServiceTest.findByIdAndUpdate("Testing1", modifyEvent);
+		eventServiceTest.deleteEvent("Testing1");
 		
 		// Then
 		assertThat(eventRepositoryTest.findByName("Testing1")).isNull();
