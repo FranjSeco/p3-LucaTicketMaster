@@ -35,7 +35,7 @@ class ShouldNotLoginIfUserNotRegistered {
 		
 		
 		
-		assertThat(user).isIn(uRepo);
+		assertThat(user).isNull();
 		
 		
 		
