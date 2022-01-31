@@ -44,12 +44,16 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserResponse findUserByUsername(String username) {
-		
+		if (userRepository.findByUsername(username)==null) {
+			return null;
+		}else {
 		return userAdapter.of(userRepository.findByUsername(username)) ;
+		}
 	}
 	@Override
 	public UserResponse findUserByEmail(String email) {
 		return userAdapter.of(userRepository.findByEmail(email));
+		
 	}
 	@Override
 	public UserResponse saveUser(User user) {

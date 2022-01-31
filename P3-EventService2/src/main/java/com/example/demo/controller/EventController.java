@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.controller.error.EventAlreadyExistsException;
+import com.example.demo.controller.error.EventIsIncompleteException;
 import com.example.demo.controller.error.EventNotFoundException;
 import com.example.demo.model.EventModel;
 import com.example.demo.response.EventResponse;
@@ -71,6 +72,9 @@ public class EventController {
 	   EventResponse check= eventService.getDetails(event.getName());
 	   if(check != null){
 		   throw new EventAlreadyExistsException(event.getName());
+	   }
+	   if (event.getName()==null||event.getDate()==null||event.getGenre()==null||event.getLocation()==null) {
+		   throw new EventIsIncompleteException(event.getName(),event.getDate(),event.getLocation(),event.getGenre());
 	   }
 	   EventResponse evento= this.eventService.addEvent(event);
 	   log.info("------ Dato Salvado " + evento);
