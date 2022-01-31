@@ -28,9 +28,9 @@ public class DeletedUser {
 		@Order(1)
 		public void shouldHaveDeletedUserTest () {
 		
-			User user = uRepo.findByUsername("Bea");
+			User user = uRepo.findByUsername("8");
 			uRepo.delete(user);
-			assertThat(user).isNull();
+			assertThat(user).isNotIn(uRepo);
 		}
 		
 	
