@@ -1,7 +1,10 @@
 package com.example.demo.DAO;
 
+import org.springframework.stereotype.Component;
+
 import com.example.demo.model.PaymentModel;
 
+@Component
 public class PaymentDao {
 	public PaymentModel paymentSuccesful() {
 		PaymentModel payment =new PaymentModel("0","Todo correcto");

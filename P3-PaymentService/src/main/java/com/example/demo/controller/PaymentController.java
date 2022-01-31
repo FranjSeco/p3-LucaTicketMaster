@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.model.BuyerModel;
+import com.example.demo.model.PaymentModel;
+import com.example.demo.response.PaymentResponse;
+import com.example.demo.service.PaymentService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -33,5 +38,18 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name ="payment", description = "Payment API")
 public class PaymentController {
 	private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
+	
+	@Autowired
+	PaymentService paymentService;
+	
+	@PostMapping()
+	public PaymentResponse processPayment(@RequestBody BuyerModel buyer) {
+		
+		log.info("Se accede a la plataforma de pago");
+		
+		return paymentService.processPayment();
+		
+	}
+	
 
 }
