@@ -33,15 +33,16 @@ class NewRegisterAddedToDataBaseTest {
 		User user = new User();
 	
 		user.setId(13L);
-		user.setUsername("Bilbo");
-		user.setUserlastname("Bolson");
+		user.setUsername("BilboHobbit");
+		user.setName("Bilbo");
+		user.setLastname("Bolson");
 		user.setEmail("bilbo@");
-		user.setPassword("33333");
+		user.setPassword("3");
 		user.setDate("2890");
 	
 		uRepo.save(user);
 		
-		assertNotNull(uRepo.findByUsername("Bilbo").getUsername());
+		assertNotNull(uRepo.findByUsername("BilboHobbit").getUsername());
 	}
 	
 	

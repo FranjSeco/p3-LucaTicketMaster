@@ -8,16 +8,21 @@ import com.example.demo.response.UserResponse;
 
 public interface UserService {
 	//Show all users
-	public List<User> findAll();
+	public List<UserResponse> findAll();
 	
-	public Optional<User> findById(long id);
+	public Optional<UserResponse> findById(Long id);
 	
-	public User findUserByUsername(String username);
-	public User findUserByEmail(String email);
-	public User saveUser(User user);
-	public User findByUsernameAndPassword(String username, String password);
+	public UserResponse findUserByUsername(String username);
 	
-	public User deleteUser(String username) ;
+	public UserResponse findUserByEmail(String email);
+	
+	public UserResponse findByUsernameAndPassword(String username, String password);
+	
+	public UserResponse saveUser(User user);
+	
+	public UserResponse deleteUser(String username) ;
+	
+	
 
 	
 

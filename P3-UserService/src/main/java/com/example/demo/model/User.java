@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,8 +27,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Size (min = 0, max = 30)
+	@Pattern(regexp= "^[^\\d\\s]+$", message= "Username no admite espacios en blanco")
 	private String username;
-	private String userlastname;
+	private String name;
+	private String lastname;
 	private String email;
 	private String password;
 	private String date;
@@ -55,7 +58,23 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	} 
+	
+	public String getLastname() {
+		return lastname;
+	}
 
+	public void setLastname(String userlastname) {
+		this.lastname = userlastname;
+	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -70,6 +89,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public Boolean isEnabled() {
@@ -91,32 +118,24 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
-
-	public String getUserlastname() {
-		return userlastname;
-	}
-
-	public void setUserlastname(String userlastname) {
-		this.userlastname = userlastname;
-	}
-
-
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", userlastname=" + userlastname + ", email=" + email
-				+ ", password=" + password + ", date=" + date + ", enabled=" + enabled + ", roles=" + roles + "]";
+		return "User [id=" + id + ", username=" + username + ", name=" + name + ", lastname=" + lastname + ", email="
+				+ email + ", password=" + password + ", date=" + date + ", enabled=" + enabled + ", roles=" + roles
+				+ "]";
 	}
+	
+	
+
+
+
+
+	
+
+	
+
+	
 
 	
 

@@ -19,10 +19,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.controller.error.EmailAlreadyExistsException;
 import com.example.demo.controller.error.IncorrectPasswordException;
 import com.example.demo.controller.error.UserAlreadyExistsException;
 import com.example.demo.controller.error.UserNotFoundException;
 import com.example.demo.model.User;
+
+import com.example.demo.response.UserResponse;
+
+import com.example.demo.repository.UserRepository;
 import com.example.demo.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,6 +53,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	//@Autowired
    // private AuthenticationManager authenticationManager;
 
@@ -57,7 +65,7 @@ public class UserController {
 	
 	//Para hacer pruebas desde el postman
 	@GetMapping("/findall")
-	public List<User> GetUsers(){
+	public List<UserResponse> GetUsers(){
 		return userService.findAll();
 	}
 	
@@ -67,28 +75,30 @@ public class UserController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
+	
 	//Registrar nuevos usuarios
 	@GetMapping("/{id}")
 	
-	public User GetUsers(
+	public UserResponse GetUsers(
 			@Parameter(description = "ID del user a localizar", required=true) 
 			@PathVariable Long id) {			
 		logger.info("------GetUsers (GET) ");
+		
 		return userService.findById(id).orElseThrow(UserNotFoundException::new);
 	}
 	
-	
+	//Entrar a la página
 	
 	@PostMapping(value="/login")
-    public User loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
-        User userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    public UserResponse loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+		UserResponse userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         //User userBack = userService.userBack(userExists);
         if (userExists != null) {
             logger.info("------ login  ");
             return userExists;
         } else {
            
-            Optional<User> check =userService.findById(user.getId());
+            Optional <UserResponse> check =userService.findById(user.getId());
             if (check.get().getUsername()== null) {
             	throw new UserNotFoundException();
             }
@@ -100,31 +110,41 @@ public class UserController {
             return null;
         }
     }
-	
+
+	//Email único
+	private boolean emailExists(String email) {
+		return userRepository.findByEmail(email) != null;
+	}
+		
 	
 	
 	@PostMapping(value = "/register")
-	public User addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
-		User userExists = userService.findUserByUsername(user.getUsername());
+	public UserResponse addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+		UserResponse userExists = userService.findUserByUsername(user.getUsername());
+		
+		
 		if (userExists != null) {
 			logger.info("------ usuario ya existente ");
 			throw new UserAlreadyExistsException(user.getUsername());
+			
+		} if (emailExists(user.getEmail())) {
+			throw new EmailAlreadyExistsException(user.getEmail());
+			
+		
 		} else {
 			logger.info("------ addUser (POST)");
-			User result = userService.saveUser(user);
+			UserResponse result = userService.saveUser(user);
 			logger.info("------ Dato Salvado " + result);
 			return result;
 		}
 	}
-
 	
 	@DeleteMapping("/{username}")
-	public User deleteUser(@PathVariable String username) {
+	public UserResponse deleteUser(@PathVariable String username) {
 		
 		userService.deleteUser(username);
 		return null;
-		
-		
+				
 	}
 	
 	
