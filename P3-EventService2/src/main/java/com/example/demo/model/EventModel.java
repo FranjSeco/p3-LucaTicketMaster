@@ -25,8 +25,6 @@ public class EventModel {
     	this.location = location;
     	this.genre = genre;
     }
-    
-
 
 	public String getId() {
 		return id;
