@@ -37,7 +37,6 @@
         <version>2.1.12</version>
     </dependency>
 
-
     <!-- Actuotor Dependency  -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -65,12 +64,6 @@
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
-<dependency>
-    <groupId>org.mongodb</groupId>
-    <artifactId>mongo-java-driver</artifactId>
-    <version>3.12.10</version>
-</dependency>
     <!-- Spring Boot Testing Dependency -->
     <dependency>
         <groupId>org.springframework.boot</groupId>

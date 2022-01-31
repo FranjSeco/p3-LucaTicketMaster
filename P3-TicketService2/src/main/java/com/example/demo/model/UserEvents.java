@@ -34,5 +34,10 @@ public class UserEvents {
 		Event = event;
 	}
 
+	@Override
+	public String toString() {
+		return "UserEvents [User=" + User + ", Event=" + Event + "]";
+	}
+
 	
 }

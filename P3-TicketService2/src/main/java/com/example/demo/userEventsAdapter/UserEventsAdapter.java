@@ -7,11 +7,12 @@ import com.example.demo.response.UserEventsResponse;
 
 @Component
 public class UserEventsAdapter {
-	public UserEventsResponse of (UserEvents userEvent ) {
-		UserEventsResponse userEventResponse = new UserEventsResponse();
-		userEventResponse.setUser(userEvent.getUser());
-		userEventResponse.setEvent(userEvent.getEvent());
-		return userEventResponse;
+	public static UserEventsResponse of(UserEvents userEvent) {
+		UserEventsResponse p = new UserEventsResponse();
+		p.setUserName(userEvent.getUser().getUsername());
+		p.setEventName(userEvent.getEvent().getName());
+
+		return p;
 	}
 	
 }
