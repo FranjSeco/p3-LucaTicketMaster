@@ -8,7 +8,7 @@ import com.example.demo.response.UserResponse;
 
 @FeignClient(name = "userService", url= "http://localhost:8888")
 public interface UserFeignClient {
-	 @GetMapping("/users/{username}")
-	  UserResponse getDetails (@PathVariable String username);
+	 @GetMapping("/users/{name}")
+	  UserResponse getDetails (@PathVariable String name);
 
 }

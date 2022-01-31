@@ -14,6 +14,7 @@ import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.response.EventResponse;
 import com.example.demo.response.UserResponse;
 import com.example.demo.security.TipoPasswordEncoder;
 
@@ -82,6 +83,18 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteById(userDelete.getId());
 		
 		return userAdapter.of(userDelete);
+	}
+	
+	
+	@Override
+	public UserResponse getDetails(String name) {
+		UserResponse event = null;
+		try {
+			 event = userAdapter.of(userRepository.findByUsername(name));
+		} catch (Exception e) {
+			System.out.println("Error: "+ e);
+		}
+		return event;
 	}
 
 	

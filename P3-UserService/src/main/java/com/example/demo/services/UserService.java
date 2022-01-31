@@ -20,6 +20,8 @@ public interface UserService {
 	
 	public UserResponse saveUser(User user);
 	
+	public UserResponse getDetails(String name);
+	
 	public UserResponse deleteUser(String username) ;
 	
 	

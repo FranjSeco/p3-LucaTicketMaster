@@ -24,7 +24,6 @@ import com.example.demo.controller.error.IncorrectPasswordException;
 import com.example.demo.controller.error.UserAlreadyExistsException;
 import com.example.demo.controller.error.UserNotFoundException;
 import com.example.demo.model.User;
-
 import com.example.demo.response.UserResponse;
 
 import com.example.demo.repository.UserRepository;
@@ -75,7 +74,7 @@ public class UserController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
-	
+	/*
 	//Registrar nuevos usuarios
 	@GetMapping("/{id}")
 	
@@ -86,6 +85,19 @@ public class UserController {
 		
 		return userService.findById(id).orElseThrow(UserNotFoundException::new);
 	}
+	
+	*/
+	//Conexion con user feign para buscar por nombre
+		@GetMapping("/{name}")
+	   public UserResponse getDetails(@Parameter(description = "Name del user a localizar", required=true)
+	   @PathVariable String name) {
+		   logger.info("------GetDetails (GET) ");
+		   UserResponse e= userService.getDetails(name);
+		   if (e == null){
+			   throw new UserNotFoundException(name);
+		   }
+		   return e;
+	   }
 	
 	//Entrar a la página
 	

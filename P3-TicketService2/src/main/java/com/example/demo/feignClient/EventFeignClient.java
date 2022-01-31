@@ -8,7 +8,7 @@ import com.example.demo.response.EventResponse;
 
 @FeignClient(name = "eventService", url= "http://localhost:7777")
 public interface EventFeignClient {
-	 @GetMapping("/event/{name}")
+	 @GetMapping("/events/{name}")
 	  EventResponse getDetails (@PathVariable String name);
 
 }

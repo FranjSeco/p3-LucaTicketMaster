@@ -9,24 +9,37 @@ import com.example.demo.model.UserEvents;
 public class UserEventsResponse implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private String userName;
-	private String eventName;
+	private UserResponse user;
+	private EventResponse event;
 	
 	
-	public String getUserName() {
-		return userName;
+	public UserEventsResponse() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getEventName() {
-		return eventName;
-	}
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
+	
+	
+	public UserEventsResponse(UserResponse userName, EventResponse eventName) {
+		super();
+		this.user = userName;
+		this.event = eventName;
 	}
 
+
+	public UserResponse getUser() {
+		return user;
+	}
+	public void setUser(UserResponse userName) {
+		this.user = userName;
+	}
+	public EventResponse getEvent() {
+		return event;
+	}
+	public void setEvent(EventResponse eventName) {
+		this.event = eventName;
+	}
 	
+
 
 	
 }

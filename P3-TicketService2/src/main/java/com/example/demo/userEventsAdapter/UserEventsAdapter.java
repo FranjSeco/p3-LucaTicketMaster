@@ -9,8 +9,8 @@ import com.example.demo.response.UserEventsResponse;
 public class UserEventsAdapter {
 	public static UserEventsResponse of(UserEvents userEvent) {
 		UserEventsResponse p = new UserEventsResponse();
-		p.setUserName(userEvent.getUser().getUsername());
-		p.setEventName(userEvent.getEvent().getName());
+		p.setUser(userEvent.getUser());
+		p.setEvent(userEvent.getEvent());
 
 		return p;
 	}
