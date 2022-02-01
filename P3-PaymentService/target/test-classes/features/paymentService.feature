@@ -5,7 +5,7 @@ Feature: Procesar una petición de pago
   Scenario Outline: Transacciones
     Given Una información de pago
     When Se envía la información con <code>
-    Then Se obtiene un código del <paymentCode>
+    Then Se obtiene un código <paymentCode>
     And Se obtiene un mensaje <paymentMsg>
     
     Examples:

@@ -28,7 +28,7 @@ public class PaymentServiceStepDefinitions {
 		  paymentService = new PaymentServiceImpl();
 	  }
 
-	  @When("Se procesa la información (-?\\\\d+) ")
+	  @When("Se envía la información con {int} ")
 	  public void testPayment(int code) throws Throwable {
 		  paymentService.processPayment( code);
 	  }
