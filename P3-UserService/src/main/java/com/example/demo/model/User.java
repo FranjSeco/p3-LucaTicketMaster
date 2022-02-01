@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -26,14 +28,28 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Size (min = 0, max = 30)
-	@Pattern(regexp= "^[^\\d\\s]+$", message= "Username no admite espacios en blanco")
+	@Pattern(regexp= "^[^\\d\\s]+$", message= "Este campo no admite espacios en blanco")
+	@NotEmpty
 	private String username;
+	
+	
 	private String name;
+	
+	
 	private String lastname;
+	
+	@Email
 	private String email;
+	
+	@NotEmpty
 	private String password;
+	
+	
 	private String date;
+	
+	
 	private Boolean enabled;
 
 	@ManyToMany(cascade = CascadeType.ALL)

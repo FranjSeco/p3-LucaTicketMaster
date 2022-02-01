@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.usersByUsernameQuery(usersQuery)
 			.authoritiesByUsernameQuery(rolesQuery)
 			.dataSource(dataSource)
-			// No se esta usando realmente porque lo genero desde Servicios
+		
 			.passwordEncoder(encoder);
 	}
 

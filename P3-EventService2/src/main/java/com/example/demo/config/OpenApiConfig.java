@@ -11,16 +11,16 @@ import io.swagger.v3.oas.models.info.License;
 @Configuration
 public class OpenApiConfig {
 	@Bean
-	public OpenAPI UserOpenApi() {
+	public OpenAPI EventOpenApi() {
 		return new OpenAPI()
-				.info(new Info().title("Users API")
-				.description("Documentacion de la Users API")
+				.info(new Info().title("Events API")
+				.description("Documentacion de la Events API")
 				.version("v1.0")
 				.contact(new Contact().name("GRUPO 2").
                         url("https://grupo2.es").email("grupo@2.es"))
                 .license(new License().name("LICENSE").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                .description("Descripcion del proyecto")
+                .description("Microservicio que se encarga de la gestión de eventos en una base de MongoDB")
                 .url("https://miproyectoGrupo2Event.es"));
 	}
 
