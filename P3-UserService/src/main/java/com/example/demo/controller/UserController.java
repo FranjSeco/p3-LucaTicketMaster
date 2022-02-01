@@ -38,56 +38,48 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-//doc añadido validated
 @Validated
-@RequestMapping(value="/users")
-//doc añadido tag
+@RequestMapping("/users")
 @Tag(name = "users", description = "Users API")
 public class UserController {
 	
 	//DOC añadido logger(seguimiento de los errores en cada class --> historial)
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-	//DOC añadido autowired
+	
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
 	private UserRepository userRepository;
 	
-	//@Autowired
-   // private AuthenticationManager authenticationManager;
 
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
 	
-	//Para hacer pruebas desde el postman
-	@GetMapping("/findall")
-	public List<UserResponse> GetUsers(){
-		return userService.findAll();
-	}
-	
-	@Operation(summary = "Buscar usuarios por ID", description = "Dado un ID, devuelve un objeto User", tags= {"user"})
+	//Para ver el listado completo de usuarios
+	@Operation(summary = "Buscar todos los usuarios", description = "Cuando se hace la petición se devuelve una List<UserResponse>", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
-	/*
-	//Registrar nuevos usuarios
-	@GetMapping("/{id}")
 	
-	public UserResponse GetUsers(
-			@Parameter(description = "ID del user a localizar", required=true) 
-			@PathVariable Long id) {			
-		logger.info("------GetUsers (GET) ");
-		
-		return userService.findById(id).orElseThrow(UserNotFoundException::new);
+	@GetMapping("/findall")
+	public List<UserResponse> GetUsers(){
+		return userService.findAll();
 	}
 	
-	*/
+	
+	
 	//Conexion con user feign para buscar por nombre
+	@Operation(summary = "Buscar usuarios por nombre", description = "Dado un nombre devuelve un objeto UserResponse", tags= {"user"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
 		@GetMapping("/{name}")
 	   public UserResponse getDetails(@Parameter(description = "Name del user a localizar", required=true)
 	   @PathVariable String name) {
@@ -99,8 +91,14 @@ public class UserController {
 		   return e;
 	   }
 	
-	//Entrar a la página
 	
+	//Entrar a la página
+	@Operation(summary = "Acceder con username y password", description = "Dado un username y un password devuelve el objeto User autorizado", tags= {"user"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario autorizado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
 	@PostMapping(value="/login")
     public UserResponse loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
 		UserResponse userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
@@ -128,8 +126,13 @@ public class UserController {
 		return userRepository.findByEmail(email) != null;
 	}
 		
-	
-	
+	//Registrar un nuevo usuario
+	@Operation(summary = "Registrar un nuevo usuario", description = "Dado un UserResponse se añade a la base de datos de usuarios", tags= {"user"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario creado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
 	@PostMapping(value = "/register")
 	public UserResponse addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
 		UserResponse userExists = userService.findUserByUsername(user.getUsername());
@@ -151,6 +154,14 @@ public class UserController {
 		}
 	}
 	
+	
+	//Eliminar un usuario de la DB
+	@Operation(summary = "Eliminar un usuario por username", description = "Dado un username elimina el objeto UserResponse correspondiente", tags= {"user"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario eliminado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
 	@DeleteMapping("/{username}")
 	public UserResponse deleteUser(@PathVariable String username) {
 		
@@ -159,6 +170,27 @@ public class UserController {
 				
 	}
 	
+	
+	/*
+	@Operation(summary = "Buscar usuarios por ID", description = "Dado un ID, devuelve un objeto User", tags= {"user"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
+	
+	//Registrar nuevos usuarios
+	@GetMapping("/{id}")
+	
+	public UserResponse GetUsers(
+			@Parameter(description = "ID del user a localizar", required=true) 
+			@PathVariable Long id) {			
+		logger.info("------GetUsers (GET) ");
+		
+		return userService.findById(id).orElseThrow(UserNotFoundException::new);
+	}
+	
+	*/
 	
 	
 

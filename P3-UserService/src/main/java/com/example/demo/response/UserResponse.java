@@ -19,7 +19,7 @@ public class UserResponse implements Serializable{
 	private String email;
 	private String password;
 	private String date;
-	private Boolean enabled;
+	
 
 	public Long getId() {
 		return id;
@@ -77,18 +77,9 @@ public class UserResponse implements Serializable{
 		this.date = date;
 	}
 
-	public Boolean isEnabled() {
-		return enabled;
-	}
+	
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-
+	
 	
 
 
