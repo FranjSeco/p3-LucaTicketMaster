@@ -1,12 +1,14 @@
 package com.example.demo.model;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.example.demo.response.EventResponse;
 import com.example.demo.response.UserResponse;
 
 public class UserEvents {
-	
+	@NotEmpty(message = "Usuario no debe estar vacío")
 	private UserResponse User;
-
+	@NotEmpty(message = "El evento no debe estar vacío")
 	private EventResponse Event;
 	
 	public UserEvents() {
