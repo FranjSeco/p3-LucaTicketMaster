@@ -25,8 +25,14 @@ public class PaymentServiceImpl implements PaymentService {
 	public PaymentResponse processPayment() {
 		// TODO Auto-generated method stub
 		log.info("Se accede al procesamiento del pago");
-		PaymentModel payment = null;
 		int numero=(int) (Math.random()*9);	
+		return processPayment(numero);
+	}
+	@Override
+	public PaymentResponse processPayment(int numero) {
+		// TODO Auto-generated method stub
+		log.info("Se accede al procesamiento del pago");
+		PaymentModel payment = null;
 		if(numero<=6) {
 			payment=paymentDao.paymentSuccesful();
 			
