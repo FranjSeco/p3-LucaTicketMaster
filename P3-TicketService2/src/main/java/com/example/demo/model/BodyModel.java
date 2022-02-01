@@ -1,6 +1,13 @@
 package com.example.demo.model;
 
+import javax.persistence.Entity;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(name="BodyModel", description = "BodyModel Class")
+@Entity
 public class BodyModel {
+	
 	private String userName;
 	private String eventName;
 	
@@ -17,5 +24,10 @@ public class BodyModel {
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
+	@Override
+	public String toString() {
+		return "BodyModel [userName=" + userName + ", eventName=" + eventName + "]";
+	}
+	
 	
 }

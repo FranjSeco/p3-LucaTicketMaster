@@ -1,10 +1,15 @@
 package com.example.demo.model;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 
 import com.example.demo.response.EventResponse;
 import com.example.demo.response.UserResponse;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(name="UserEvents", description = "UserEvents Class")
+@Entity
 public class UserEvents {
 	@NotEmpty(message = "Usuario no debe estar vacío")
 	private UserResponse User;
