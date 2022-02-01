@@ -9,6 +9,8 @@ public class UserEvents {
 
 	private EventResponse Event;
 	
+	private String precio;
+	
 	public UserEvents() {
 	}
 	
@@ -34,10 +36,19 @@ public class UserEvents {
 		Event = event;
 	}
 
-	@Override
-	public String toString() {
-		return "UserEvents [User=" + User + ", Event=" + Event + "]";
+	public String getPrecio() {
+		return precio;
 	}
 
+	public void setPrecio(String precio) {
+		this.precio = precio;
+	}
+
+	@Override
+	public String toString() {
+		return "UserEvents [User=" + User + ", Event=" + Event + ", precio=" + precio + "]";
+	}
+
+	
 	
 }

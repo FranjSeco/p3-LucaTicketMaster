@@ -40,11 +40,15 @@ public class PaymentController {
 	@PostMapping()
 	public PaymentResponse processPayment(@RequestBody BuyerModel buyer) {
 		
+		
+		
 		log.info("Se accede a la plataforma de pago");
 		
 		return paymentService.processPayment();
 		
 	}
+	
+	
 	
 
 }

@@ -56,7 +56,7 @@ public class UserTicketController {
 		
 		EventResponse evento = eventFeign.getDetails(data.getEventName());
 		
-		UserEventsResponse combo = new UserEventsResponse(usuario, evento);
+		UserEventsResponse combo = new UserEventsResponse(usuario, evento, "100");
 		
 		System.out.println("+++++++++++" + eventFeign.getDetails(data.getEventName()));
 		
