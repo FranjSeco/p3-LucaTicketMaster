@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.usersByUsernameQuery(usersQuery)
 			.authoritiesByUsernameQuery(rolesQuery)
 			.dataSource(dataSource)
-			// No se esta usando realmente porque lo genero desde Servicios
+		
 			.passwordEncoder(encoder);
 	}
 
@@ -81,7 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web
 			.ignoring()
-			.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/swagger-ui/**", "/v3/api-docs/**");
+			.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html");
 	}
 
 }

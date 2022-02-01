@@ -21,7 +21,7 @@ public class OpenApiConfig {
                         url("https://grupo2.es").email("grupo@2.es"))
                 .license(new License().name("LICENSE").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                .description("Descripcion del proyecto")
+                .description("Microservicio que se encarga de la gestión de usuarios en una base de datos de MySql")
                 .url("https://miproyectoGrupo2.es"));
 	}
 
