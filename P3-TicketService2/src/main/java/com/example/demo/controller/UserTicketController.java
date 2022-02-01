@@ -35,12 +35,12 @@ public class UserTicketController {
 	@Autowired
 	EventFeignClient eventFeign;
 	
-	@Operation(summary = "Buscar todos los eventos", description = "Cuando se hace la petición se devuelve una List<EventResponse> ", tags= {"event"})
+	@Operation(summary = "Llevar a cabo la compra de un ticket", description = "Cuando se hace la petición se devuelve una un ticket de un evento asignado a un usuario.", tags= {"ticket"})
 		@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Lista localizada", content = {
+			@ApiResponse(responseCode = "200", description = "Compra llevada a cabo con exito.", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = UserEventsResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Lista no encontrada (NO implementado)", content = @Content) })
+			@ApiResponse(responseCode = "404", description = "Informacion necesaria no encontrada (NO implementado)", content = @Content) })
 	  
 
 	@PostMapping("/buyticket")
