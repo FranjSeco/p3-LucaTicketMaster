@@ -92,7 +92,7 @@ public class UserController {
 	   }
 	
 	
-	//Entrar a la página
+	//Entrar a la página login
 	@Operation(summary = "Acceder con username y password", description = "Dado un username y un password devuelve el objeto User autorizado", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario autorizado", content = {
