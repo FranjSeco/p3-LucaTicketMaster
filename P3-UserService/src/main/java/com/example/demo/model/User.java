@@ -1,15 +1,11 @@
 package com.example.demo.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -19,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(name="User", description = "User Class")
 @Entity
+@Table(name="user")
 public class User {
 
 	@Schema(name= "id", 
@@ -27,37 +24,34 @@ public class User {
             required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
 	private Long id;
 	
 	@Size (min = 0, max = 30)
-	@Pattern(regexp= "^[^\\d\\s]+$", message= "Este campo no admite espacios en blanco")
+	@Pattern(regexp= "^[^\\s]+$", message= "Este campo no admite espacios en blanco")
 	@NotEmpty
+	@Column(name="username")
 	private String username;
 	
-	
+	@Column(name="name")
 	private String name;
 	
-	
+	@Column(name="lastname")
 	private String lastname;
 	
 	@Email
+	@Column(name="email")
 	private String email;
 	
 	@NotEmpty
+	@Column(name="password")
 	private String password;
 	
-	
+	@Column(name="date")
 	private String date;
 	
 	
-	private Boolean enabled;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "user_role", 
-			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
-			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	private Set<Role> roles;
+	
 
 	public Long getId() {
 		return id;
@@ -115,32 +109,15 @@ public class User {
 		this.date = date;
 	}
 
-	public Boolean isEnabled() {
-		return enabled;
-	}
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", name=" + name + ", lastname=" + lastname + ", email="
-				+ email + ", password=" + password + ", date=" + date + ", enabled=" + enabled + ", roles=" + roles
-				+ "]";
+				+ email + ", password=" + password + ", date=" + date + "]";
 	}
+
+	
+
+	
 	
 	
 
