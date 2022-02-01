@@ -37,10 +37,18 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/payment")
 @Tag(name ="payment", description = "Payment API")
 public class PaymentController {
+	
 	private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
 	
 	@Autowired
 	PaymentService paymentService;
+	
+	@Operation(summary = "Solicitud de pago", description = "Cuando se hace la petición se devuelve un código de pago y un mensaje ", tags= {"payment"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Pago completado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = PaymentResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Lista no encontrada (NO implementado)", content = @Content) })
 	
 	@PostMapping()
 	public PaymentResponse processPayment(@RequestBody BuyerModel buyer) {
