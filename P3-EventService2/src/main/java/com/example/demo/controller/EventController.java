@@ -143,7 +143,7 @@ public class EventController {
    
    @GetMapping("/name/{name}")
    public List<EventModel> findByName(@PathVariable(value = "name") String name) {
-	   return eventRepository.findByName(name);
+	   return eventRepository.findByGivenName(name);
    }
    
    @GetMapping("/location/{location}")
