@@ -3,6 +3,8 @@ package com.example.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import com.example.demo.model.User;
 import com.example.demo.response.UserResponse;
 
@@ -18,13 +20,14 @@ public interface UserService {
 	
 	public UserResponse findByUsernameAndPassword(String username, String password);
 	
-	public UserResponse saveUser(User user);
+	public UserResponse saveUser(@Valid User user);
 	
 	public UserResponse getDetails(String name);
 	
 	public UserResponse deleteUser(String username) ;
 	
-	public UserResponse findByIdAndUpdate(String id, User user);
+	public UserResponse findByIdAndUpdate(String username, User user);
+
 
 	
 
