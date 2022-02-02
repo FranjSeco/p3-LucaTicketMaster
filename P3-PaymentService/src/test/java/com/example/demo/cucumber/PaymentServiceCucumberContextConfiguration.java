@@ -11,13 +11,14 @@ import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  * Class to use spring application context while running cucumber
  */
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @CucumberContextConfiguration
-@ContextConfiguration(classes = P3PaymentServiceApplication.class, loader = SpringBootContextLoader.class)
+@SpringBootTest(classes = P3PaymentServiceApplication.class)
+@ContextConfiguration(classes = P3PaymentServiceApplication.class, loader = AnnotationConfigContextLoader.class)
 public class PaymentServiceCucumberContextConfiguration {
 
   private static final Logger LOG = LoggerFactory.getLogger(PaymentServiceCucumberContextConfiguration.class);

@@ -43,12 +43,12 @@ public class PaymentController {
 		
 		EventResponse eventInfo = new EventResponse(name, price);
 		
-		PaymentResponse paymentInfo = new PaymentResponse(paymentService.processPayment());
+		PaymentResponse paymentInfo = paymentService.paymentResult();
 		
 		FinalResultResponse finalResult = new FinalResultResponse(paymentInfo, eventInfo);
 		
 		log.info("Se accede a la plataforma de pago");
-		
+
 		return finalResult;
 		
 	}
