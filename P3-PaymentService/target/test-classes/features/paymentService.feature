@@ -6,11 +6,11 @@ Feature: Procesar una petición de pago
     Given Una información de pago
     When Se envía la información con <code>
     Then Se obtiene un código <paymentCode>
-    And Se obtiene un mensaje <paymentMsg>
+    Then Se obtiene un mensaje <paymentMsg>
     
     Examples:
-		| code| paymentCode | message |
+		| code| paymentCode | paymentMsg |
 		| 0 | 0 | "Todo correcto" |
-		| 1 | 1 | "Tarjeta caducada" |
-		| 2 | 2 | "Saldo insuficiente" |
-		| 3 | 3 | "Saldo diario superado" |
+		| 7 | 1 | "Tarjeta rechazada" |
+		| 8 | 2 | "Saldo insuficiente en la cuenta" |
+		| 9 | 3 | "Superado el saldo diario" |
