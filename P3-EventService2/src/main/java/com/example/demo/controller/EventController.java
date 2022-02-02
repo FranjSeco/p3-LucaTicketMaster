@@ -89,13 +89,13 @@ public class EventController {
 			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
    
-   @GetMapping("/{name}")
+   @GetMapping("/{event}")
    public EventResponse getDetails(@Parameter(description = "Name del event a localizar", required=true)
-   @PathVariable String name) {
+   @PathVariable String event) {
 	   log.info("------GetDetails (GET) ");
-	   EventResponse e= eventService.getDetails(name);
+	   EventResponse e= eventService.getDetails(event);
 	   if (e == null){
-		   throw new EventNotFoundException(name);
+		   throw new EventNotFoundException(event);
 	   }
 	   return e;
    }

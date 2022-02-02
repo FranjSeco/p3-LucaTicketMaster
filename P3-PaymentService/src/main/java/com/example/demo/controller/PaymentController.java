@@ -4,14 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.adapter.FinalAdapter;
-import com.example.demo.response.EventResponse;
-import com.example.demo.response.FinalResultResponse;
 import com.example.demo.response.PaymentResponse;
 import com.example.demo.service.PaymentService;
 
@@ -33,9 +28,6 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
-	@Autowired
-	FinalAdapter finalAda;
-	
 	@Operation(summary = "Solicitud de pago", description = "Cuando se hace la petición se devuelve un código de pago y un mensaje ", tags= {"payment"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Pago completado", content = {
@@ -43,20 +35,12 @@ public class PaymentController {
 			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Lista no encontrada (NO implementado)", content = @Content) })
 	
-	@PostMapping()
-	public FinalResultResponse processPayment(@RequestParam String name, @RequestParam String price) {
-		
-		EventResponse eventInfo = new EventResponse(name, price);
-
-		PaymentResponse paymentInfo = paymentService.paymentResult();
-
-		
-		FinalResultResponse finalResult = new FinalResultResponse(paymentInfo, eventInfo);
+	@GetMapping()
+	public PaymentResponse processPayment() {
 		
 		log.info("Se accede a la plataforma de pago");
 		
-		return finalAda.of(finalResult);
-
+		return paymentService.processPayment();
 		
 	}
 	
