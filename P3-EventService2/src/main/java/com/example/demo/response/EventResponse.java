@@ -11,7 +11,14 @@ public class EventResponse implements Serializable {
 	private String date;
 	private String location;
 	private String genre;
+	private String price;
 
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
 	public String getId() {
 		return id;
 	}
