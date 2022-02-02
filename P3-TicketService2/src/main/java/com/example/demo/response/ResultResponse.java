@@ -4,17 +4,21 @@ public class ResultResponse {
 
 	private UserEventsResponse ticketInfoResponse;
 	private PaymentResponse paymentInfoResponse;
+	private String precioFinal;
 	
 	
 	
-	public ResultResponse() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public ResultResponse(UserEventsResponse ticketInfoResponse, PaymentResponse paymentInfoResponse) {
+	public ResultResponse(UserEventsResponse ticketInfoResponse, PaymentResponse paymentInfoResponse,
+			String precioFinal) {
 		super();
 		this.ticketInfoResponse = ticketInfoResponse;
 		this.paymentInfoResponse = paymentInfoResponse;
+		this.precioFinal = precioFinal;
+	}
+
+	public ResultResponse() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public UserEventsResponse getTicketInfoResponse() {
 		return ticketInfoResponse;
@@ -28,6 +32,11 @@ public class ResultResponse {
 	public void setPaymentInfoResponse(PaymentResponse paymentInfoResponse) {
 		this.paymentInfoResponse = paymentInfoResponse;
 	}
-	
+	public String getPrecioFinal() {
+		return precioFinal;
+	}
+	public void setPrecioFinal(String precioFinal) {
+		this.precioFinal = precioFinal;
+	}
 	
 }
