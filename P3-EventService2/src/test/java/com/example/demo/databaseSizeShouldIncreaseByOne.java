@@ -35,7 +35,7 @@ public class databaseSizeShouldIncreaseByOne {
 		}
 		
 		// When
-		EventModel newEvent = new EventModel("123123126831723","Testing1","Testing1","Testing1","Testing1");
+		EventModel newEvent = new EventModel("123123126831723","Testing1","Testing1","Testing1","Testing1", "Testing1");
 		eventRepositoryTest.save(newEvent);
 		
 		// Then

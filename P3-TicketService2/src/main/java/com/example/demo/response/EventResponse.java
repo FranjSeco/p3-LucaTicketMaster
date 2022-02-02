@@ -8,15 +8,21 @@ import org.slf4j.LoggerFactory;
 public class EventResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static Logger log = LoggerFactory.getLogger(EventResponse.class);
 	
 	private String id;
 	private String name;
 	private String date;
 	private String location;
 	private String genre;
+	private String price;
 
 	
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
 	public String getId() {
 		return id;
 	}

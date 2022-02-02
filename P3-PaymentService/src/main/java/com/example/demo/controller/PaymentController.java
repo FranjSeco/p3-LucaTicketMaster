@@ -4,9 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.response.EventResponse;
+import com.example.demo.response.FinalResultResponse;
 import com.example.demo.response.PaymentResponse;
 import com.example.demo.service.PaymentService;
 
@@ -35,12 +38,18 @@ public class PaymentController {
 			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Lista no encontrada (NO implementado)", content = @Content) })
 	
-	@GetMapping()
-	public PaymentResponse processPayment() {
+	@PostMapping()
+	public FinalResultResponse processPayment(String name, String price) {
+		
+		EventResponse eventInfo = new EventResponse(name, price);
+		
+		PaymentResponse paymentInfo = new PaymentResponse(paymentService.processPayment());
+		
+		FinalResultResponse finalResult = new FinalResultResponse(paymentInfo, eventInfo);
 		
 		log.info("Se accede a la plataforma de pago");
 		
-		return paymentService.processPayment();
+		return finalResult;
 		
 	}
 	

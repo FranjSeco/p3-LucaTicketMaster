@@ -4,16 +4,13 @@ public class ResultResponse {
 
 	private UserEventsResponse ticketInfoResponse;
 	private PaymentResponse paymentInfoResponse;
-	private String precioFinal;
 	
 	
 	
-	public ResultResponse(UserEventsResponse ticketInfoResponse, PaymentResponse paymentInfoResponse,
-			String precioFinal) {
+	public ResultResponse(UserEventsResponse ticketInfoResponse, PaymentResponse paymentInfoResponse) {
 		super();
 		this.ticketInfoResponse = ticketInfoResponse;
 		this.paymentInfoResponse = paymentInfoResponse;
-		this.precioFinal = precioFinal;
 	}
 
 	public ResultResponse() {
@@ -31,12 +28,6 @@ public class ResultResponse {
 	}
 	public void setPaymentInfoResponse(PaymentResponse paymentInfoResponse) {
 		this.paymentInfoResponse = paymentInfoResponse;
-	}
-	public String getPrecioFinal() {
-		return precioFinal;
-	}
-	public void setPrecioFinal(String precioFinal) {
-		this.precioFinal = precioFinal;
 	}
 	
 }

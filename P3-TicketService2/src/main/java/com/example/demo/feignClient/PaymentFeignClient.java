@@ -9,5 +9,5 @@ import com.example.demo.response.PaymentResponse;
 @FeignClient(name = "paymentService", url= "http://localhost:9999")
 public interface PaymentFeignClient {
 	 @GetMapping("/payment")
-	  PaymentResponse processPayment ();
+	  PaymentResponse processPayment (@PathVariable String name, @PathVariable String price);
 }

@@ -15,15 +15,25 @@ public class EventModel {
     private String date;
     private String location;
     private String genre;
+    private String price;
     
     
-    public EventModel(String id, String name, String date, String location, String genre) {
+    public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public EventModel(String id, String name, String date, String location, String genre, String price) {
     	super();
     	this.id = id;
     	this.name = name;
     	this.date = date;
     	this.location = location;
     	this.genre = genre;
+    	this.price = price;
     }
 
 	public String getId() {

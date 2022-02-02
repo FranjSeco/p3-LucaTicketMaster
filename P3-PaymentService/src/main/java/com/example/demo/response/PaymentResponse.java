@@ -7,6 +7,7 @@ public class PaymentResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String paymentCode;
 	private String paymentMsg;
+	
 	public String getPaymentCode() {
 		return paymentCode;
 	}

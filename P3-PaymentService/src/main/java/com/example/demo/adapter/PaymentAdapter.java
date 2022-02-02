@@ -12,6 +12,7 @@ public class PaymentAdapter {
 		PaymentResponse paymentResponse = new PaymentResponse();
 		paymentResponse.setPaymentCode(payment.getPaymentCode());
 		paymentResponse.setPaymentMsg(payment.getPaymentMsg());
+		
 		return paymentResponse;
 	}
 
