@@ -31,6 +31,8 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
+	@Autowired
+	FinalAdapter finalAda;
 	
 	@Operation(summary = "Solicitud de pago", description = "Cuando se hace la petición se devuelve un código de pago y un mensaje ", tags= {"payment"})
 	@ApiResponses(value = {
@@ -50,7 +52,7 @@ public class PaymentController {
 		
 		log.info("Se accede a la plataforma de pago");
 		
-		return finalResult;
+		return finalAda.of(finalResult);
 		
 	}
 	

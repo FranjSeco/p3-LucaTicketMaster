@@ -1,13 +1,15 @@
 package com.example.demo.adapter;
 
-import com.example.demo.model.ResultModel;
+import org.springframework.stereotype.Component;
+
 import com.example.demo.response.FinalResultResponse;
 
+@Component
 public class FinalAdapter {
-	public FinalResultResponse of(ResultModel finalResult) {
+	public FinalResultResponse of(FinalResultResponse finalResult) {
 		FinalResultResponse finalResultResponse = new FinalResultResponse();
-		finalResultResponse.setEventResponse(finalResult.getEventInfoResult());
-		finalResultResponse.setPaymentResponse(finalResult.getPaymentResult());
+		finalResultResponse.setEventResponse(finalResult.getEventResponse());
+		finalResultResponse.setPaymentResponse(finalResult.getPaymentResponse());
 		
 		return finalResultResponse;
 	}
