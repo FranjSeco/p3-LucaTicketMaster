@@ -1,25 +1,26 @@
 package com.example.demo.response;
 
+
 public class FinalResultResponse {
-	private PaymentResponse codeResponse;
+	private PaymentResponse paymentResponse;
 	private EventResponse eventResponse;
 	
 	
-	public PaymentResponse getCodeResponse() {
-		return codeResponse;
+	public PaymentResponse getPaymentResponse() {
+		return paymentResponse;
 	}
-	public void setCodeResponse(PaymentResponse codeResponse) {
-		this.codeResponse = codeResponse;
+	public void setPaymentResponse(PaymentResponse paymentResponse) {
+		this.paymentResponse = paymentResponse;
 	}
 	public EventResponse getEventResponse() {
 		return eventResponse;
 	}
-	public void setEventResponse(EventResponse eventResponse) {
-		this.eventResponse = eventResponse;
+	public void setEventResponse(EventResponse eventInfoModel) {
+		this.eventResponse = eventInfoModel;
 	}
-	public FinalResultResponse(PaymentResponse codeResponse, EventResponse eventResponse) {
+	public FinalResultResponse(PaymentResponse paymentResponse, EventResponse eventResponse) {
 		super();
-		this.codeResponse = codeResponse;
+		this.paymentResponse = paymentResponse;
 		this.eventResponse = eventResponse;
 	}
 	public FinalResultResponse() {
@@ -27,5 +28,7 @@ public class FinalResultResponse {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+
 	
 }

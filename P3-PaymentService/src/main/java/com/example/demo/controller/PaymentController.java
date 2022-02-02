@@ -3,11 +3,11 @@ package com.example.demo.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.adapter.FinalAdapter;
 import com.example.demo.response.EventResponse;
 import com.example.demo.response.FinalResultResponse;
 import com.example.demo.response.PaymentResponse;
@@ -31,6 +31,9 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
+	@Autowired
+	FinalAdapter finalAda;
+	
 	@Operation(summary = "Solicitud de pago", description = "Cuando se hace la petición se devuelve un código de pago y un mensaje ", tags= {"payment"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Pago completado", content = {
@@ -42,14 +45,16 @@ public class PaymentController {
 	public FinalResultResponse processPayment(String name, String price) {
 		
 		EventResponse eventInfo = new EventResponse(name, price);
-		
+
 		PaymentResponse paymentInfo = paymentService.paymentResult();
+
 		
 		FinalResultResponse finalResult = new FinalResultResponse(paymentInfo, eventInfo);
 		
 		log.info("Se accede a la plataforma de pago");
+		
+		return finalAda.of(finalResult);
 
-		return finalResult;
 		
 	}
 	
