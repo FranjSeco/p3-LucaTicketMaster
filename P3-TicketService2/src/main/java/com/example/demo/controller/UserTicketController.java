@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.feignClient.EventFeignClient;
+import com.example.demo.feignClient.PaymentFeignClient;
 import com.example.demo.feignClient.UserFeignClient;
 import com.example.demo.model.BodyModel;
 import com.example.demo.model.UserEvents;
 import com.example.demo.response.EventResponse;
+import com.example.demo.response.PaymentResponse;
+import com.example.demo.response.ResultResponse;
 import com.example.demo.response.UserEventsResponse;
 import com.example.demo.response.UserResponse;
 
@@ -35,6 +38,9 @@ public class UserTicketController {
 	@Autowired
 	EventFeignClient eventFeign;
 	
+	@Autowired
+	PaymentFeignClient paymentFeign;
+	
 	@Operation(summary = "Llevar a cabo la compra de un ticket", description = "Cuando se hace la petición se devuelve una un ticket de un evento asignado a un usuario.", tags= {"ticket"})
 		@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Compra llevada a cabo con exito.", content = {
@@ -44,13 +50,9 @@ public class UserTicketController {
 	  
 
 	@PostMapping("/buyticket")
-	public UserEventsResponse buyTicket(@RequestBody BodyModel data) {
+	public ResultResponse buyTicket(@RequestBody BodyModel data) {
  
-		
 		System.out.println("------------------------" + data);
-		
-		// llamada a microservicios user y eventos
-
 		
 		UserResponse usuario = userFeign.getDetails(data.getUserName());
 		
@@ -58,11 +60,16 @@ public class UserTicketController {
 		
 		UserEventsResponse combo = new UserEventsResponse(usuario, evento);
 		
+		PaymentResponse paymentPlatform = paymentFeign.processPayment();
+		
+		ResultResponse result = new ResultResponse(combo, paymentPlatform);
+		
 		System.out.println("+++++++++++" + eventFeign.getDetails(data.getEventName()));
 		
 		log.info("Se accede al ticket");
 		
-		return combo;
+		return result;
 	}
 	
+
 }
