@@ -13,6 +13,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.response.UserResponse;
 import com.example.demo.security.TipoPasswordEncoder;
 
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -57,6 +58,8 @@ public class UserServiceImpl implements UserService {
 		
 		return userAdapter.of(userRepository.save(user));
 	}
+	
+	
 	@Override
 	public UserResponse findByUsernameAndPassword(String username, String password) {
 		
@@ -87,22 +90,10 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public UserResponse findByIdAndUpdate(String username, User user) {
-		User userUpdater = userRepository.findByUsername(username);
 		
-		userUpdater.setUsername(user.getUsername());
-		userUpdater.setName(user.getName());
-		userUpdater.setLastname(user.getLastname());
-		userUpdater.setEmail(user.getName());
-		userUpdater.setPassword(user.getPassword());
-		userUpdater.setDate(user.getDate());
-		
-		userRepository.save(userUpdater);
-		
-		return userAdapter.of(userUpdater);
+		return userAdapter.of(userRepository.save(user));
 	}
 
-	
-	
-	
+
 	
 }
