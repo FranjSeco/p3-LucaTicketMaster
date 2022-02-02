@@ -20,7 +20,7 @@ public class newEventAddedToDatabase {
 		assertThat(eventRepositoryTest.findByName("Testing1")).isNull();
 		
 		// When
-		EventModel newEvent = new EventModel("Testing1","Testing1","Testing1","Testing1","Testing1", "Testing1");
+		EventModel newEvent = new EventModel("Testing1","Testing1","Testing1","Testing1","Testing1");
 		eventRepositoryTest.save(newEvent);
 		
 		// Then

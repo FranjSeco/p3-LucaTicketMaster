@@ -17,7 +17,7 @@ public class databaseConnectionSuccessful {
 	@Test
 	void contextLoads() {
 		// Given
-		EventModel newEvent = new EventModel("Testing1","Testing1","Testing1","Testing1","Testing1","Testing1");
+		EventModel newEvent = new EventModel("Testing1","Testing1","Testing1","Testing1","Testing1");
 		
 		// When
 		eventRepositoryTest.save(newEvent);

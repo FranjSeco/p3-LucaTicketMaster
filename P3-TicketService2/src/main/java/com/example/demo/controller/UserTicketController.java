@@ -60,17 +60,17 @@ public class UserTicketController {
 		
 		UserEventsResponse combo = new UserEventsResponse(usuario, evento);
 		
-		PaymentResponse paymentPlatform = paymentFeign.processPayment(evento.getName(), evento.getPrice());
+		PaymentResponse paymentPlatform = paymentFeign.processPayment();
 		
-		
-		/*
 		int random = (int) (Math.random() * 10); 
 		
 		String precio = "El precio del ticket es " + random + " Euros";
-		*/
 		
-		ResultResponse result = new ResultResponse(combo, paymentPlatform);
-				
+		ResultResponse result = new ResultResponse(combo, paymentPlatform, precio);
+		
+		System.out.println("+++++++++++" + eventFeign.getDetails(data.getEventName()));
+		
+		
 		
 		log.info("Se accede al ticket");
 		

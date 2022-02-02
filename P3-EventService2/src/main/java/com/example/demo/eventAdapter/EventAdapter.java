@@ -18,7 +18,6 @@ public class EventAdapter {
 			eventResponse.setDate(event.getDate());
 			eventResponse.setLocation(event.getLocation());
 			eventResponse.setGenre(event.getGenre());
-			eventResponse.setPrice(event.getPrice());
 			return eventResponse;
 		}
 	

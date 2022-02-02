@@ -24,7 +24,7 @@ public interface UserService {
 	
 	public UserResponse deleteUser(String username) ;
 	
-	
+	public UserResponse findByIdAndUpdate(String id, User user);
 
 	
 
