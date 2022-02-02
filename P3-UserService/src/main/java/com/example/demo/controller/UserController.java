@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,9 +24,8 @@ import com.example.demo.controller.error.IncorrectPasswordException;
 import com.example.demo.controller.error.UserAlreadyExistsException;
 import com.example.demo.controller.error.UserNotFoundException;
 import com.example.demo.model.User;
-import com.example.demo.response.UserResponse;
-
 import com.example.demo.repository.UserRepository;
+import com.example.demo.response.UserResponse;
 import com.example.demo.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,12 +61,13 @@ public class UserController {
 	@Operation(summary = "Buscar todos los usuarios", description = "Cuando se hace la petición se devuelve una List<UserResponse>", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+					@Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
 	
 	@GetMapping("/findall")
 	public List<UserResponse> GetUsers(){
+		logger.info("Se accede a lista");
 		return userService.findAll();
 	}
 	
@@ -77,7 +77,7 @@ public class UserController {
 	@Operation(summary = "Buscar usuarios por nombre", description = "Dado un nombre devuelve un objeto UserResponse", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+					@Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
 		@GetMapping("/{name}")
@@ -96,23 +96,28 @@ public class UserController {
 	@Operation(summary = "Acceder con username y password", description = "Dado un username y un password devuelve el objeto User autorizado", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario autorizado", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+					@Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
 	@PostMapping(value="/login")
-    public UserResponse loginUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+	
+    public UserResponse loginUser(@Parameter(description = "Nombre y contraseña del usuario que se va a loggear", required=true)
+    		@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+		
 		UserResponse userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		
         //User userBack = userService.userBack(userExists);
+		
         if (userExists != null) {
             logger.info("------ login  ");
             return userExists;
         } else {
            
-            Optional <UserResponse> check =userService.findById(user.getId());
-            if (check.get().getUsername()== null) {
+       	UserResponse checkUser = userService.findUserByUsername(user.getUsername());
+            if (checkUser.getUsername() == null) {
             	throw new UserNotFoundException();
             }
-            if (check.get().getPassword()!=user.getPassword()) {
+            if (checkUser.getPassword()!=user.getPassword()) {
             	
             	throw new IncorrectPasswordException(user.getUsername());
             }
@@ -130,11 +135,13 @@ public class UserController {
 	@Operation(summary = "Registrar un nuevo usuario", description = "Dado un UserResponse se añade a la base de datos de usuarios", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario creado", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+					@Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
+	
 	@PostMapping(value = "/register")
-	public UserResponse addUser(@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+	public UserResponse addUser(@Parameter(description = "Nombre del usuario a registrar", required=true)
+			@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
 		UserResponse userExists = userService.findUserByUsername(user.getUsername());
 		
 		
@@ -159,15 +166,40 @@ public class UserController {
 	@Operation(summary = "Eliminar un usuario por username", description = "Dado un username elimina el objeto UserResponse correspondiente", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario eliminado", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+					@Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
+	
 	@DeleteMapping("/{username}")
-	public UserResponse deleteUser(@PathVariable String username) {
-		
+	public UserResponse deleteUser(@Parameter(description = "Name del usuario a borrar", required=true)
+			@PathVariable String username) {
+		 logger.info("-----------deleteEvent  (DELETE)");
+		UserResponse u = userService.getDetails(username);
+		if (u == null) {
+			throw new UserNotFoundException(username);
+		}
 		userService.deleteUser(username);
-		return null;
+		return u;
 				
+	}
+	
+	@Operation(summary = "Modificar usuarios encontrados por username", description = "Dado un username permite modificar la información de dicho usuario", tags= {"user"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario actualizado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
+	
+	@PutMapping("/{username}")
+	public UserResponse modifyUser(@Parameter(description = "Name del usuario a modificar", required=true)		
+	 @PathVariable String username, @RequestBody User user) {
+		logger.info("---------modifyUser (PUT)");
+		UserResponse checkUser = userService.getDetails(username);
+		if (checkUser == null) {
+			throw new UserNotFoundException(username);
+		}
+		
+		return userService.findByIdAndUpdate(username, user);
 	}
 	
 	
@@ -175,7 +207,7 @@ public class UserController {
 	@Operation(summary = "Buscar usuarios por ID", description = "Dado un ID, devuelve un objeto User", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+					@Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
 	
