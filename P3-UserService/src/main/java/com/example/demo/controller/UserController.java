@@ -64,7 +64,7 @@ public class UserController {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
+			@ApiResponse(responseCode = "404", description = "Lista no encontrada (NO implementado)", content = @Content)})
 	
 	@GetMapping("/findall")
 	public List<UserResponse> GetUsers(){
@@ -171,7 +171,7 @@ public class UserController {
 	}
 	
 	
-	/*
+	
 	@Operation(summary = "Buscar usuarios por ID", description = "Dado un ID, devuelve un objeto User", tags= {"user"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
@@ -190,7 +190,7 @@ public class UserController {
 		return userService.findById(id).orElseThrow(UserNotFoundException::new);
 	}
 	
-	*/
+	
 	
 	
 
