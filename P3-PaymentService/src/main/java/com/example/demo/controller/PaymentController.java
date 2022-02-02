@@ -4,9 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.adapter.PaymentAdapter;
+import com.example.demo.model.PaymentModel;
 import com.example.demo.response.PaymentResponse;
 import com.example.demo.service.PaymentService;
 
@@ -28,6 +31,9 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
+	@Autowired
+	PaymentAdapter paymentAdapter;
+	
 	@Operation(summary = "Solicitud de pago", description = "Cuando se hace la petición se devuelve un código de pago y un mensaje ", tags= {"payment"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Pago completado", content = {
@@ -35,12 +41,29 @@ public class PaymentController {
 			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Lista no encontrada (NO implementado)", content = @Content) })
 	
-	@GetMapping()
-	public PaymentResponse processPayment() {
+	@GetMapping("/{eventName}/{eventPrice}")
+	public PaymentResponse processPayment(@PathVariable String eventName, @PathVariable String eventPrice) {
 		
 		log.info("Se accede a la plataforma de pago");
 		
-		return paymentService.paymentResult();
+		String eventN = eventName;
+		
+		System.out.println("-------------------------------------"+ eventN);
+		
+		
+		String eventP = eventPrice;
+		
+		PaymentModel resultado = new PaymentModel();
+		
+		resultado.setEventP(eventP);
+		resultado.setEventN(eventN);
+		resultado.setPaymentCode(paymentService.paymentResult().getPaymentCode());
+		resultado.setPaymentMsg(paymentService.paymentResult().getPaymentMsg());
+		
+		System.out.println("---------------------------"+paymentService.paymentResult().getPaymentCode());
+		System.out.println("---------------------------"+paymentService.paymentResult().getPaymentMsg());
+		
+		return paymentAdapter.of(resultado);
 		
 	}
 	

@@ -54,6 +54,11 @@ public class EventResponse implements Serializable {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
+	@Override
+	public String toString() {
+		return "EventResponse [id=" + id + ", name=" + name + ", date=" + date + ", location=" + location + ", genre="
+				+ genre + ", price=" + price + "]";
+	}
 
 
 }

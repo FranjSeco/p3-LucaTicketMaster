@@ -60,9 +60,9 @@ public class UserTicketController {
 		
 		UserEventsResponse combo = new UserEventsResponse(usuario, evento);
 		
-		PaymentResponse paymentPlatform = paymentFeign.processPayment();
+		PaymentResponse paymentPlatform = paymentFeign.processPayment(evento.getName(), evento.getPrice());
 		
-		String precio = "El precio del ticket es " + evento.getPrice();
+		String precio = "El precio del ticket es " + evento.getPrice() + " Euros";
 		
 		ResultResponse result = new ResultResponse(combo, paymentPlatform, precio);
 		

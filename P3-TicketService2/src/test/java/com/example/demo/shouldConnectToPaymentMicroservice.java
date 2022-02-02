@@ -19,7 +19,7 @@ public class shouldConnectToPaymentMicroservice {
 	void contextLoads() {
 		
 		// When
-		assertThat(paymentFeign.processPayment())
+		assertThat(paymentFeign.processPayment("holabebe", "holabebe2"))
 		// Then
 		.isNotNull();
 		

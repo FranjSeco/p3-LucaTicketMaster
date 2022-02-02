@@ -17,5 +17,11 @@ public class BodyModel {
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
+	@Override
+	public String toString() {
+		return "BodyModel [userName=" + userName + ", eventName=" + eventName + "]";
+	}
+	
+	
 	
 }
