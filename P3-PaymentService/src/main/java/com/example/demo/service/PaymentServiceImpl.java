@@ -22,31 +22,36 @@ public class PaymentServiceImpl implements PaymentService {
 	PaymentAdapter paymentAdapter;
 
 	@Override
-	public PaymentResponse processPayment() {
+	public PaymentModel processPayment() {
 		// TODO Auto-generated method stub
 		log.info("Se accede al procesamiento del pago");
 		int numero=(int) (Math.random()*9);	
 		return processPayment(numero);
 	}
 	@Override
-	public PaymentResponse processPayment(int numero) {
+	public PaymentModel processPayment(int numero) {
 		// TODO Auto-generated method stub
 		log.info("Se accede al procesamiento del pago");
 		PaymentModel payment = null;
 		if(numero<=6) {
-			payment=paymentDao.paymentSuccesful();
+			payment=new PaymentDao().paymentSuccesful();
 			
 		}else if(numero>6 & numero<=7) {
-			payment=paymentDao.cardDeclined();
+			payment=new PaymentDao().cardDeclined();
 			
 		}else if(numero>7 & numero<=8) {
-			payment=paymentDao.notEnoughBalance();
+			payment=new PaymentDao().notEnoughBalance();
 			
 		}else if(numero>8) {
-			payment=paymentDao.paymentDeclined();
+			payment=new PaymentDao().paymentDeclined();
 		}
 		
-		return paymentAdapter.of(payment);
+		return payment;
+	}
+	
+	@Override
+	public PaymentResponse paymentResult() {
+		return paymentAdapter.of(processPayment());
 	}
 
 }

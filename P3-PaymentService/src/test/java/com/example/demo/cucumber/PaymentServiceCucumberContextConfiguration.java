@@ -1,23 +1,22 @@
 package com.example.demo.cucumber;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
 import com.example.demo.P3PaymentServiceApplication;
 
 import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.context.SpringBootContextLoader;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.ContextConfiguration;
-
 /**
  * Class to use spring application context while running cucumber
  */
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @CucumberContextConfiguration
-@ContextConfiguration(classes = P3PaymentServiceApplication.class, loader = SpringBootContextLoader.class)
+@SpringBootTest(classes = P3PaymentServiceApplication.class)
+@ContextConfiguration(classes = P3PaymentServiceApplication.class, loader = AnnotationConfigContextLoader.class)
 public class PaymentServiceCucumberContextConfiguration {
 
   private static final Logger LOG = LoggerFactory.getLogger(PaymentServiceCucumberContextConfiguration.class);

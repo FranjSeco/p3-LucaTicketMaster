@@ -10,6 +10,10 @@ public class PaymentModel {
 		this.paymentMsg = paymentMsg;
 	}
 
+	public PaymentModel() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getPaymentCode() {
 		return paymentCode;
 	}

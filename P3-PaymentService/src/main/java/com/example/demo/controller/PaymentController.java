@@ -40,7 +40,7 @@ public class PaymentController {
 		
 		log.info("Se accede a la plataforma de pago");
 		
-		return paymentService.processPayment();
+		return paymentService.paymentResult();
 		
 	}
 	
