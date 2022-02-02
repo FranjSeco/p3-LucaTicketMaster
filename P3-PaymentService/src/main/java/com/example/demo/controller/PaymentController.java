@@ -48,9 +48,6 @@ public class PaymentController {
 		
 		String eventN = eventName;
 		
-		System.out.println("-------------------------------------"+ eventN);
-		
-		
 		String eventP = eventPrice;
 		
 		PaymentModel resultado = new PaymentModel();
@@ -59,9 +56,6 @@ public class PaymentController {
 		resultado.setEventN(eventN);
 		resultado.setPaymentCode(paymentService.paymentResult().getPaymentCode());
 		resultado.setPaymentMsg(paymentService.paymentResult().getPaymentMsg());
-		
-		System.out.println("---------------------------"+paymentService.paymentResult().getPaymentCode());
-		System.out.println("---------------------------"+paymentService.paymentResult().getPaymentMsg());
 		
 		return paymentAdapter.of(resultado);
 		

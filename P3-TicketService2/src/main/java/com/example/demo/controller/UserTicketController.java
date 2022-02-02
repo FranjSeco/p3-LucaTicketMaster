@@ -51,8 +51,6 @@ public class UserTicketController {
 
 	@PostMapping("/buyticket")
 	public ResultResponse buyTicket(@RequestBody BodyModel data) {
- 
-		System.out.println("------------------------" + data);
 		
 		UserResponse usuario = userFeign.getDetails(data.getUserName());
 		
@@ -64,11 +62,7 @@ public class UserTicketController {
 		
 		String precio = "El precio del ticket es " + evento.getPrice() + " Euros";
 		
-		ResultResponse result = new ResultResponse(combo, paymentPlatform, precio);
-		
-		System.out.println("+++++++++++" + eventFeign.getDetails(data.getEventName()));
-		
-		
+		ResultResponse result = new ResultResponse(combo, paymentPlatform, precio);		
 		
 		log.info("Se accede al ticket");
 		
