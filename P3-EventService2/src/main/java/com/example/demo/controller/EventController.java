@@ -141,10 +141,20 @@ public class EventController {
 	   return e;
    }
    
+
+   @GetMapping("/name/{name}")
+   public List<EventModel> findByName(@PathVariable(value = "name") String name) {
+	   return eventRepository.findByGivenName(name);
+   }
+   
    @GetMapping("/location/{location}")
-   public List<EventModel> findByLocation(@PathVariable(value = "location") String location){
+   public List<EventModel> findByLocation(@PathVariable(value = "location") String location) {
 	   return eventRepository.findByLocation(location);
    }
    
+   @GetMapping("/genre/{genre}")
+   public List<EventModel> findByGenre(@PathVariable(value = "genre") String genre) {
+	   return eventRepository.findByGenre(genre);
+   }
 
 }

@@ -12,9 +12,19 @@ import com.example.demo.model.EventModel;
 public interface EventRepository extends MongoRepository<EventModel, String> {
 	
 	// Find by name
+	@Query("{name: {'$regex': '?0', '$options':'i'} }")
+	List<EventModel> findByGivenName(String name);
+	
 	@Query("{name:'?0'}")
 	EventModel findByName(String name);
 	
-	@Query("{location: '?0'}")
-	List <EventModel> findByLocation(String location);
+
+	// Find by location
+	@Query("{location: {'$regex': '?0', '$options':'i'} }")
+	List<EventModel> findByLocation(String location);
+	
+	// Find by genre
+	@Query("{genre: {'$regex': '?0', '$options':'i'} }")
+	List<EventModel> findByGenre(String genre);
+
 }
