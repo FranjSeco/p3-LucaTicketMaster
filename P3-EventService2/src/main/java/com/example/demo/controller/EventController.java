@@ -141,15 +141,36 @@ public class EventController {
 	   return e;
    }
    
+   @Operation(summary = "Filtrar eventos por nombre.", description = "Busqueda en la base de datos de eventos. Busca desde nombres que contengan una letra dada a nombres que coincidan totalmente con la palabra que queremos.", tags= {"event"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Busqueda realizada con exito.", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Eventos no encontrado (NO implementado)", content = @Content) })
+   
    @GetMapping("/name/{name}")
    public List<EventModel> findByName(@PathVariable(value = "name") String name) {
 	   return eventRepository.findByGivenName(name);
    }
    
+   @Operation(summary = "Filtrar eventos por localizacion.", description = "Busqueda en la base de datos de eventos. Busca desde localizaciones que contengan una letra dada a localizaciones que coincidan totalmente con la palabra que queremos.", tags= {"event"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Busqueda realizada con exito.", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Eventos no encontrado (NO implementado)", content = @Content) })
+   
    @GetMapping("/location/{location}")
    public List<EventModel> findByLocation(@PathVariable(value = "location") String location) {
 	   return eventRepository.findByLocation(location);
    }
+   
+   @Operation(summary = "Filtrar eventos por genero musical.", description = "Busqueda en la base de datos de eventos. Busca desde generos que contengan una letra dada a generos que coincidan totalmente con la palabra que queremos.", tags= {"event"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Busqueda realizada con exito.", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Eventos no encontrado (NO implementado)", content = @Content) })
    
    @GetMapping("/genre/{genre}")
    public List<EventModel> findByGenre(@PathVariable(value = "genre") String genre) {
