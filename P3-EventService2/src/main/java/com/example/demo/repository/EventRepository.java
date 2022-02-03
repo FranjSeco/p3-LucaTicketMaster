@@ -18,6 +18,7 @@ public interface EventRepository extends MongoRepository<EventModel, String> {
 	@Query("{name:'?0'}")
 	EventModel findByName(String name);
 	
+
 	// Find by location
 	@Query("{location: {'$regex': '?0', '$options':'i'} }")
 	List<EventModel> findByLocation(String location);
@@ -25,4 +26,5 @@ public interface EventRepository extends MongoRepository<EventModel, String> {
 	// Find by genre
 	@Query("{genre: {'$regex': '?0', '$options':'i'} }")
 	List<EventModel> findByGenre(String genre);
+
 }

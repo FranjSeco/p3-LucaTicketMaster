@@ -140,14 +140,14 @@ public class EventController {
 	   eventService.deleteEvent(name);
 	   return e;
    }
-   
+
    @Operation(summary = "Filtrar eventos por nombre.", description = "Busqueda en la base de datos de eventos. Busca desde nombres que contengan una letra dada a nombres que coincidan totalmente con la palabra que queremos.", tags= {"event"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Busqueda realizada con exito.", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = EventResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "Petición no válida (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Eventos no encontrado (NO implementado)", content = @Content) })
-   
+  
    @GetMapping("/name/{name}")
    public List<EventModel> findByName(@PathVariable(value = "name") String name) {
 	   return eventRepository.findByGivenName(name);
@@ -176,4 +176,5 @@ public class EventController {
    public List<EventModel> findByGenre(@PathVariable(value = "genre") String genre) {
 	   return eventRepository.findByGenre(genre);
    }
+
 }
