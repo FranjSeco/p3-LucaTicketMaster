@@ -22,4 +22,6 @@ public interface EventService  {
 	
 	// Delete event
 	public EventResponse deleteEvent(String name);
+	
+	
 }

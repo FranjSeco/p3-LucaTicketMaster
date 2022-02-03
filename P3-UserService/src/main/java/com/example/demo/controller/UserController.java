@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -103,29 +102,33 @@ public class UserController {
 	@PostMapping(value="/login")
 	
     public UserResponse loginUser(@Parameter(description = "Nombre y contraseña del usuario que se va a loggear", required=true)
-    		@Valid @RequestBody User user, BindingResult bindingResult, Model model) {
+    		@Valid @RequestBody User user, BindingResult bindingResult, Model model)  {
 		
 		UserResponse userExists = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-		
+		UserResponse userCheck = userService.findUserByUsername(user.getUsername());
         //User userBack = userService.userBack(userExists);
-		
+		//UserResponse checkUser = userService.getDetails(user.getUsername());
         if (userExists != null) {
             logger.info("------ login  ");
             return userExists;
-        } else {
+        } 
+       // throw new UserNotFoundException();
+        
+        else {
+        	
+	        if (userCheck != null) {
+	 
+	            	throw new IncorrectPasswordException(user.getUsername());
+	            	}
+	            
+	         throw new UserNotFoundException();
+	       } 
+       
            
-       	UserResponse checkUser = userService.findUserByUsername(user.getUsername());
-            if (checkUser.getUsername() == null) {
-            	throw new UserNotFoundException();
-            }
-            if (checkUser.getPassword()!=user.getPassword()) {
-            	
-            	throw new IncorrectPasswordException(user.getUsername());
-            }
-            logger.info("------ no esta en la base : registrate");
-            return null;
-        }
+        
     }
+	
+	
 
 	//Email único
 	private boolean emailExists(String email) {

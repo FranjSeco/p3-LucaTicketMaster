@@ -23,6 +23,7 @@ import com.example.demo.controller.error.EventAlreadyExistsException;
 import com.example.demo.controller.error.EventIsIncompleteException;
 import com.example.demo.controller.error.EventNotFoundException;
 import com.example.demo.model.EventModel;
+import com.example.demo.repository.EventRepository;
 import com.example.demo.response.EventResponse;
 import com.example.demo.service.EventService;
 
@@ -43,6 +44,9 @@ public class EventController {
 
    @Autowired
    private EventService eventService;
+   
+   @Autowired
+   private EventRepository eventRepository;
    
    @Operation(summary = "Buscar todos los eventos", description = "Cuando se hace la petición se devuelve una List<EventResponse> ", tags= {"event"})
 	@ApiResponses(value = {
@@ -135,6 +139,11 @@ public class EventController {
 	   }
 	   eventService.deleteEvent(name);
 	   return e;
+   }
+   
+   @GetMapping("/location/{location}")
+   public List<EventModel> findByLocation(@PathVariable(value = "location") String location){
+	   return eventRepository.findByLocation(location);
    }
    
 
